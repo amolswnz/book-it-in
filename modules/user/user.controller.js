@@ -1,7 +1,7 @@
 require('./user.model');
 
 var mongoose = require('mongoose'),
-    User = mongoose.model('users');
+  User = mongoose.model('users');
 
 exports.readAllUsers = function(req, res) {
   User.find({}, function(err, data) {

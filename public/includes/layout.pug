@@ -1,0 +1,39 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        base(href="/")
+        title MeanApp
+        link(rel='stylesheet', type='text/css', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='/vendor/toastr/toastr.min.css')
+        link(rel='stylesheet', type='text/css', href='/vendor/components-font-awesome/css/font-awesome.min.css')
+        link(rel='stylesheet', type='text/css', href='/css/style.css')
+        link(rel="shortcut icon" href="/img/favicon.png")
+    body(ng-app='meanApp')
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle.collapsed(data-toggle="collapse",data-target="#navbar",aria-expanded="false",aria-controls="navbar")
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#/') MeanApp
+
+                #navbar.navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li: a(href="#/home") <i class="fa fa-home"></i> Home
+                        li: a(href="#/user") <i class="fa fa-user"></i> Users
+                        li: a(href="#/user/add") <i class="fa fa-cog"></i> Add New
+
+        #main-section.container-fluid
+            .row-fluid
+                block main-content
+        footer.container-fluid
+            .col-md-12.text-center
+                a(href="https://amolwankhede.com",target="_blank")
+                    img#logo(src="/img/aw-footer.png" alt="AW Logo")
+                | 2017 Developed by
+                a#me(href="https://amolwankhede.com", target="_blank") Amol Wankhede
+        include scripts

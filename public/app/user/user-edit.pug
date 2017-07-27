@@ -1,0 +1,11 @@
+h1 Edit user 
+div(class='form-group')
+  input(class='form-control',type='text',name='firstName',ng-model='editCtrl.user.firstName')
+div(class='form-group')
+  input(class='form-control',type='text',name='lastName',ng-model='editCtrl.user.lastName')
+div(class='form-group')
+  input(class='form-control',type='text',name='email',ng-model='editCtrl.user.email')
+div(class='form-group')
+  input(class='form-control',type='tel',name='mobile',ng-model='editCtrl.user.mobile')
+
+button(class='btn btn-info' ng-click='editCtrl.update()') Update

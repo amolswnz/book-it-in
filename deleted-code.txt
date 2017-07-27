@@ -1,0 +1,20 @@
+input(type='text',name='firstName',ng-model='addCtrl.user.firstName')
+input(type='text',name='lastName',ng-model='addCtrl.user.lastName')
+input(type='text',name='email',ng-model='addCtrl.user.email')
+input(type='text',name='password',ng-model='addCtrl.user.pwd')
+input(type='text',name='mobile',ng-model='addCtrl.user.mobile')
+
+button(class='btn btn-info' ng-click='addCtrl.add()') Update
+
+
+Users page
+
+a(href='{{user._id}}')
+
+
+// console.log('text');
+// userService.getUser($routeParams.id).then(function(usr) {
+//   console.log('getUser', usr);
+//   vm.user = usr;
+// });
+//

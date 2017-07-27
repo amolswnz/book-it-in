@@ -1,0 +1,20 @@
+{
+  "name": "bookitin",
+  "version": "1.0.0",
+  "description": "Book it in co nz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amol Wankhede",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.5",
+    "morgan": "^1.8.1",
+    "pug": "^2.0.0-beta11",
+    "stylus": "^0.54.5",
+    "toastr": "^2.1.2"
+  }
+}

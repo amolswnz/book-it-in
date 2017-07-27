@@ -1,0 +1,11 @@
+h1 Single user
+p {{ profileCtrl.user.firstName }} {{ profileCtrl.user.lastName }}
+  | 
+  a(href='mailto:{{ profileCtrl.user.email }}') {{ profileCtrl.user.email }}
+  | 
+  span {{ profileCtrl.user.status }} 
+
+a(href="#/user/{{profileCtrl.user._id}}/edit")
+  button(class='btn btn-info') Edit
+a(href="#/user/{{profileCtrl.user._id}}/delete")
+  button(class='btn btn-danger') Delete

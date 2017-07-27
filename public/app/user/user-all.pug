@@ -1,0 +1,24 @@
+div
+  h3 View all Users
+  hr
+  table.table 
+    thead
+      tr
+        th Full Name
+        th Email 
+        th Mobile
+        th Status
+        th Action
+    tr(ng-repeat='user in users.allData')
+      //- td {{user}}
+      td {{ user.firstName }} {{ user.lastName }}
+      td {{ user.email }}
+      td {{ user.mobile }}
+      td {{ user.status }} 
+      td 
+        a(href="#/user/{{user._id}}/edit",class='btn btn-primary') Edit 
+        | 
+        a(href="#/user/{{user._id}}/delete",class='btn btn-danger') Delete
+  
+a(href='#/user/add' class='btn btn-primary') Add new
+p

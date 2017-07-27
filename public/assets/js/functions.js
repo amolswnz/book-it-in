@@ -1035,7 +1035,8 @@ var SEMICOLON = SEMICOLON || {};
 
 			if( !$body.hasClass('sticky-footer') && $footer.length > 0 && $wrapper.has('#footer') ) {
 				if( windowH > wrapperH ) {
-					$footer.css({ 'margin-top': ( windowH - wrapperH ) });
+					// console.log(windowH, wrapperH);
+					// $footer.css({ 'margin-top': ( windowH - wrapperH ) });
 				}
 			}
 		},

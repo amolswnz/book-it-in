@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(config) {
     var dbHost = 'mongodb://localhost/',
-        dbName = 'meanApp';
+        dbName = 'bookitin-v2';
     mongoose.Promise = global.Promise;
     mongoose.connect(dbHost + dbName);
     var db = mongoose.connection;

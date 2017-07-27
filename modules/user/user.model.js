@@ -14,4 +14,4 @@ var UserSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('meanAppUser', UserSchema, 'meanAppUsers');
+module.exports = mongoose.model('users', UserSchema, 'users');

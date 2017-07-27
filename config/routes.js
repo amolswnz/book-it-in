@@ -5,6 +5,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/index2', function(req, res) {
+    res.render('index2');
+  });
+
   var user = require('../modules/user/user.controller');
   app.route('/api/user')
     .get(user.readAllUsers)

@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('meanApp')
+  angular.module('bookitinApp')
     .factory('userService', ['$http', userService]);
 
   function userService($http, $q, $log, $timeout) {

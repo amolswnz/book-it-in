@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  angular.module('meanApp', ['ngResource', 'ngRoute']);
+  angular.module('bookitinApp', ['ngResource', 'ngRoute']);
 
-  angular.module('meanApp')
+  angular.module('bookitinApp')
     .config(function($routeProvider, $locationProvider) {
       // $locationProvider.html5Mode({
       //     enabled: true,

@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('meanApp')
+  angular.module('bookitinApp')
     .controller('UserProfileCtrl', ['userService', '$location', '$routeParams', UserProfileCtrl]);
 
   function UserProfileCtrl(userService, $location, $routeParams) {

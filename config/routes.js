@@ -5,8 +5,17 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/index2', function(req, res) {
-    res.render('index2');
+  app.get('/transfer', function(req, res) {
+    res.render('transfer');
+  });
+  app.get('/rental-car', function(req, res) {
+    res.render('rental-car');
+  });
+  app.get('/activity', function(req, res) {
+    res.render('activity');
+  });
+  app.get('/tour', function(req, res) {
+    res.render('tour');
   });
 
   var user = require('../modules/user/user.controller');

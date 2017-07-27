@@ -1,0 +1,20 @@
+extends includes/layout
+
+block main-content
+  // Main title area
+  section(id="page-title", class="page-title-dark")
+    div(class="container clearfix")
+      h1 Book Activity 
+      span Make a booking with us
+      ol(class="breadcrumb")
+        li: a(href="#") <i class="fa fa-home"></i> Home
+        li(class='active') Activity Bookings 
+
+  // Actual page content
+  section(id="content")
+    div(class="content-wrap")
+      div(class="container clearfix")
+        div(ng-view)
+
+block additional-scripts
+  // Add here additional script files for the specific file

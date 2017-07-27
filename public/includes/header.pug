@@ -7,7 +7,8 @@ head
   title Book IT in
   
   // Theme styles
-  //- link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic', type='text/css')
+  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic', type='text/css')
+  link(rel="stylesheet", href="assets/css/bootstrap.css", type="text/css")
   link(rel="stylesheet", href="assets/css/style.css", type="text/css")
   link(rel="stylesheet", href="assets/css/swiper.css", type="text/css")
   link(rel="stylesheet", href="assets/css/dark.css", type="text/css")

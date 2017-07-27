@@ -8,6 +8,8 @@
       //     enabled: true,
       //     requireBase: false
       // });
+      
+      // /partials = /public/app defined in express.js
       $locationProvider.hashPrefix("");
       $routeProvider
         .when('/', {
@@ -16,7 +18,7 @@
         })
         .when('/login', {
           templateUrl: '/partials/user/login',
-          // controller: 'MainCtrl'
+          controller: 'UserCtrl'
         });
         // .when('/home', {
         //   templateUrl: '/partials/main/home',

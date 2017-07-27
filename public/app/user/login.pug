@@ -1,7 +1,7 @@
 extends /includes/layout
 
 block main-content
-  // Main title area
+  //- Main title area
   section(id="page-title", class="page-title-dark")
     div(class="container clearfix")
       h1 Login to your account 
@@ -10,7 +10,7 @@ block main-content
         li: a(href="#") <i class="fa fa-home"></i> Home
         li(class='active') Login - Register
 
-  // Actual page content
+  //- Actual page content
   section(id="content")
     div(class="content-wrap")
       div(class="container clearfix")
@@ -34,6 +34,7 @@ block main-content
           </div>
         </div>
         <div class="col_two_third col_last nobottommargin">
+          h3 -{{ txt }}-
           <h3>Don't have an Account? Register Now.</h3>
           <p class="terms_and_conditions">By creating an account, you will get the BEST price guaranteed.</p>
           <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
@@ -55,7 +56,9 @@ block main-content
             </div>
           </form>
           <p class="terms_and_conditions">By creating an account, you're agreeing with our <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Statement</a>.</p>
+          p(class='terms_and_conditions') Interested in #[a(href='#') BookItIn.co.nz for Business?]
         </div>
 
 block additional-scripts
-  // Add here additional script files for the specific file
+  //- Add here additional script files for the specific file
+  script()

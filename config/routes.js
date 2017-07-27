@@ -6,16 +6,19 @@ module.exports = function(app) {
   });
 
   app.get('/transfer', function(req, res) {
-    res.render('transfer');
+    res.render('app/transfer/transfer');
   });
-  app.get('/rental-car', function(req, res) {
-    res.render('rental-car');
+  app.get('/rentalcar', function(req, res) {
+    res.render('app/rentalcar/rentalcar');
   });
   app.get('/activity', function(req, res) {
-    res.render('activity');
+    res.render('app/activity/activity');
   });
   app.get('/tour', function(req, res) {
-    res.render('tour');
+    res.render('app/tour/tour');
+  });
+  app.get('/login', function(req, res) {
+    res.render('app/user/login');
   });
 
   var user = require('../modules/user/user.controller');

@@ -15,8 +15,8 @@
       $locationProvider.hashPrefix(""); // Makes #! as #
       $routeProvider
         .when('/', {
-          templateUrl: '/partials/main/main',
-          controller: 'MainCtrl'
+          templateUrl: '/partials/home/home',
+          controller: 'HomeCtrl'
         })
         .when('/login', {
           templateUrl: '/partials/user/login',

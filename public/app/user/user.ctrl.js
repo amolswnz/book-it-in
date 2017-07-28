@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('bookitinApp')
+  angular.module('userApp')
     .controller('UserCtrl', function($scope) {
       $scope.txt = "Hello from User Controller";
       console.log('test');

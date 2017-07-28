@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  angular.module('bookitinApp', ['ngResource', 'ngRoute']);
+  angular.module('homeApp', ['ngResource', 'ngRoute']);
 
-  angular.module('bookitinApp')
+  angular.module('homeApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
       $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         console.log('Current route name: ' + $location.path());
@@ -18,7 +18,7 @@
       // $locationProvider.html5Mode(true);
 
       // /partials = /public/app defined in express.js
-      console.log('- inside angular module bookitinApp before routing');
+      console.log('- inside angular module homeApp before routing');
 
       $locationProvider.hashPrefix(""); // Makes #! as #
       $routeProvider
@@ -26,10 +26,10 @@
           templateUrl: '/partials/home/home',
           controller: 'HomeCtrl'
         })
-        .when('/login', {
-          templateUrl: '/partials/user/login2',
-          controller: 'UserCtrl'
-        });
+        // .when('/login', {
+        //   templateUrl: '/partials/user/login2',
+        //   controller: 'UserCtrl'
+        // });
       // .when('/home', {
       //   templateUrl: '/partials/main/home',
       //   controller: 'HomeCtrl'

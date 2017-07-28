@@ -21,8 +21,8 @@
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
-        .when('/login', {
-          templateUrl: '/partials/tour/index',
+        .when('/bookitin/tour', {
+          templateUrl: '/partials/tour/view',
           controller: 'TourCtrl'
         });
     });

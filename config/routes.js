@@ -5,17 +5,17 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/bookitin/transfer', function(req, res) {
-    res.render('app/transfer/index');
+  app.get('/bookitin/activity', function(req, res) {
+    res.render('app/activity/index');
   });
   app.get('/bookitin/rentalcar', function(req, res) {
     res.render('app/rentalcar/index');
   });
-  app.get('/bookitin/activity', function(req, res) {
-    res.render('app/activity/index');
-  });
   app.get('/bookitin/tour', function(req, res) {
     res.render('app/tour/index');
+  });
+  app.get('/bookitin/transfer', function(req, res) {
+    res.render('app/transfer/index');
   });
   app.get('/login', function(req, res) {
     res.render('app/user/index');

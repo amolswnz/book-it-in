@@ -21,7 +21,7 @@
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
-        .when('/', {
+        .when('/bookitin/activity', {
           templateUrl: '/partials/activity/view',
           controller: 'ActivityCtrl'
         });

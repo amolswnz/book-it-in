@@ -6,7 +6,6 @@
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
       $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         console.log('Current route name: ' + $location.path());
-        console.log($routeParams);
       });
     }])
 
@@ -15,7 +14,6 @@
         enabled: true,
         requireBase: false
       });
-      // $locationProvider.html5Mode(true);
 
       // /partials = /public/app defined in express.js
       console.log('- inside angular module transferApp before routing');

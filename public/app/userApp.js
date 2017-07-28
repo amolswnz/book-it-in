@@ -6,7 +6,6 @@
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
       $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         console.log('Current route name: ' + $location.path());
-        console.log($routeParams);
       });
     }])
 
@@ -17,7 +16,7 @@
       });
 
       // /partials = /public/app defined in express.js
-      console.log('- inside angular module userApp before routing', $locationProvider);
+      console.log('- inside angular module userApp before routing');
 
       // Makes #! as #
       $locationProvider.hashPrefix("");

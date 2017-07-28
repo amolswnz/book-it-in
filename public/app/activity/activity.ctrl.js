@@ -3,7 +3,7 @@
   angular.module('activityApp')
     .controller('ActivityCtrl', function($scope) {
       $scope.txt = "Hello from activity Controller";
-      console.log('test');
+      console.log('-- inside activity ctrl');
     });
 
 }());

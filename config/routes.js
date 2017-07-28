@@ -18,7 +18,7 @@ module.exports = function(app) {
     res.render('app/tour/index');
   });
   app.get('/login', function(req, res) {
-    res.render('app/user/user');
+    res.render('app/user/index');
   });
 
   var user = require('../modules/user/user.controller');

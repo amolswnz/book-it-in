@@ -3,7 +3,7 @@
   angular.module('rentalcarApp')
     .controller('RentalcarCtrl', function($scope) {
       $scope.txt = "Hello from rentalcar Controller";
-      console.log('test');
+      console.log('-- inside rentalcar ctrl');
     });
 
 }());

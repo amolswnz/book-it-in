@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('userApp', ['ngResource', 'ngRoute']);
+  angular.module('userApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
 
   angular.module('userApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {

@@ -33,3 +33,10 @@ body {
   width: 100%;
   height: auto;
 }
+
+.debug {
+  padding: 5px;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+  /*display: none;*/
+}

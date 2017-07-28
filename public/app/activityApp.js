@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  angular.module('userApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
+  angular.module('activityApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
 
-  angular.module('userApp')
+  angular.module('activityApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
       $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         console.log('Current route name: ' + $location.path());
@@ -15,16 +15,17 @@
         enabled: true,
         requireBase: false
       });
+      // $locationProvider.html5Mode(true);
 
       // /partials = /public/app defined in express.js
-      console.log('- inside angular module userApp before routing', $locationProvider);
+      console.log('- inside angular module activityApp before routing');
 
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
         .when('/login', {
-          templateUrl: '/partials/user/login',
-          controller: 'UserCtrl'
+          templateUrl: '/partials/activity/index',
+          controller: 'ActivityCtrl'
         });
     });
 }());

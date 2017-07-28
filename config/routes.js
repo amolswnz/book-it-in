@@ -5,17 +5,17 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/transfer', function(req, res) {
-    res.render('app/transfer/transfer');
+  app.get('/bookitin/transfer', function(req, res) {
+    res.render('app/transfer/index');
   });
-  app.get('/rentalcar', function(req, res) {
-    res.render('app/rentalcar/rentalcar');
+  app.get('/bookitin/rentalcar', function(req, res) {
+    res.render('app/rentalcar/index');
   });
-  app.get('/activity', function(req, res) {
-    res.render('app/activity/activity');
+  app.get('/bookitin/activity', function(req, res) {
+    res.render('app/activity/index');
   });
-  app.get('/tour', function(req, res) {
-    res.render('app/tour/tour');
+  app.get('/bookitin/tour', function(req, res) {
+    res.render('app/tour/index');
   });
   app.get('/login', function(req, res) {
     res.render('app/user/user');

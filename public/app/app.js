@@ -8,9 +8,11 @@
       //     enabled: true,
       //     requireBase: false
       // });
-      
+
       // /partials = /public/app defined in express.js
-      $locationProvider.hashPrefix("");
+      console.log('- inside angular module bookitinApp before routing');
+
+      $locationProvider.hashPrefix(""); // Makes #! as #
       $routeProvider
         .when('/', {
           templateUrl: '/partials/main/main',

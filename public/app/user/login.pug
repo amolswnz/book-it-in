@@ -9,7 +9,7 @@ block main-content
       ol(class="breadcrumb")
         li: a(href="#") <i class="fa fa-home"></i> Home
         li(class='active') Login - Register
-
+        
   //- Actual page content
   section(id="content")
     div(class="content-wrap")
@@ -34,7 +34,7 @@ block main-content
           </div>
         </div>
         <div class="col_two_third col_last nobottommargin">
-          h3 -{{ txt }}-
+          div(ng-view)
           <h3>Don't have an Account? Register Now.</h3>
           <p class="terms_and_conditions">By creating an account, you will get the BEST price guaranteed.</p>
           <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">

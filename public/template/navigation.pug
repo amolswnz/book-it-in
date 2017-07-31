@@ -10,11 +10,11 @@ header#header
           img(src='img/logo@2x.png', alt='Canvas Logo')
       nav#primary-menu.sub-title
         ul
-          li
+          li(class=isHomeActive)
             a(href='/', target='_self')
               div Home
               span Lets Start
-          li
+          li(class=isBookingActive)
             a(href='#')
               div BOOK IT IN
               span Find options
@@ -58,7 +58,7 @@ header#header
             a(href='/contact', target='_self')
               div Contact
               span Need help
-          li
+          li(class=isLoginActive)
             a(href='/login', target='_self')
               div Login
               span Register

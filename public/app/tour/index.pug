@@ -1,10 +1,8 @@
-include /template/header
+extends /template/layout
+block variables
+  - var appName = 'tourApp'
 
-body(ng-app='tourApp', class='stretched', md-theme='vrTheme')
-  //- Main navigation menu
-  include /template/navigation
-
-  //- The main content which will be exetended in each file
+block main-content
   section(id="page-title", class="page-title-dark")
     div(class="container clearfix")
       h1 Book Tour 
@@ -19,11 +17,6 @@ body(ng-app='tourApp', class='stretched', md-theme='vrTheme')
       div(class="container clearfix")
         div(ng-view)
 
-  //- Footer content
-  include /template/footer
-
-  //- All the required script files
-  include /template/scripts
-  //- Add here additional script files for the app specific files
+block additional-scripts
   script(src="/app/tourApp.js", type='text/javascript')
   script(src="/app/tour/tour.ctrl.js", type='text/javascript')

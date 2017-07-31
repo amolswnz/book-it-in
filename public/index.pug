@@ -46,37 +46,34 @@ html
             img(src='img/home/rc.jpeg',class='img-responsive-aw')
           div(col='col_full')
             div(ng-view)
-    <div class="section parallax nomargin notopborder dark" style="background-image: url('img/home/parallax.jpg'); padding: 100px 0;" data-stellar-background-ratio="0.3">
-      <div class="container clearfix">
-        <div class="emphasis-title center">
-          <h2 style="font-size: 52px;">Section with Dark Parallax Background</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-6 bottommargin">
-            <div class="testimonial">
-              <div class="testi-image">
-                <a href="#"><img src="img/home/1.jpg" alt="Customer Testimonails"></a>
-              </div>
-              <div class="testi-content">
-                <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!</p>
-                <div class="testi-meta"> John Doe <span>XYZ Inc.</span> </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 bottommargin">
-            <div class="testimonial">
-              <div class="testi-image">
-                <a href="#"><img src="img/home/2.jpeg" alt="Customer Testimonails"></a>
-              </div>
-              <div class="testi-content">
-                <p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
-                <div class="testi-meta"> Collis Ta'eed <span>Envato Inc.</span> </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    .section.parallax.nomargin.notopborder.dark(style="background-image: url('img/home/parallax.jpg'); padding: 100px 0;", data-stellar-background-ratio='0.3')
+      .container.clearfix
+        .emphasis-title.center
+          h2(style='font-size: 52px;') Section with Dark Parallax Background
+        .row
+          .col-md-6.bottommargin
+            .testimonial
+              .testi-image
+                a(href='#')
+                  img(src='img/home/1.jpg', alt='Customer Testimonails')
+              .testi-content
+                p
+                  | Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!
+                .testi-meta
+                  | John Doe 
+                  span XYZ Inc.
+          .col-md-6.bottommargin
+            .testimonial
+              .testi-image
+                a(href='#')
+                  img(src='img/home/2.jpeg', alt='Customer Testimonails')
+              .testi-content
+                p
+                  | Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.
+                .testi-meta
+                  | Collis Ta'eed 
+                  span Envato Inc.
+
     include template/footer
     //- Required js
     script(src='/vendor/jquery/dist/jquery.min.js', type='text/javascript')

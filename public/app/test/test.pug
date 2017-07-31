@@ -1,5 +1,12 @@
-- var appName = 'asbc'
-include /template/layout
+extends /template/layout
+block variables
+  - var appName = 'testApp'
+
+block main-content
+  h1 main 
+block additional-scripts
+  h2 additional
+  
 //- 
 //- body(ng-app='activityApp', class='stretched', md-theme='vrTheme')
 //-   //- Main navigation menu

@@ -1,33 +1,64 @@
-<header id="header">
-  <div id="header-wrap">
-    <div class="container clearfix">
-      <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-      <div id="logo">
-        //- <a href="/" target="_self" class="standard-logo" data-dark-logo="img/logo-dark.png"><img src="theme/images/logo.png" alt="Canvas Logo"></a>
-        //- <a href="/" target="_self" class="retina-logo" data-dark-logo="img/logo-dark@2x.png"><img src="img/logo@2x.png" alt="Canvas Logo"></a> 
-      </div>
-      <nav id="primary-menu" class="sub-title">
-        <ul>
-          <li><a href="/" target="_self"><div>Home</div><span>Lets Start</span></a> </li>
-          <li><a href="#"><div>BOOK IT IN</div><span>Find options</span></a>
-            <ul>
-              <li><a href="/bookitin/activity" target="_self"><div><i class="fa fa-map"></i> Activity Booking</div></a></li>
-              <li><a href="/bookitin/rentalcar" target="_self"><div><i class="fa fa-car"></i> Rental Car</div></a></li>
-              <li><a href="/bookitin/tour" target="_self"><div><i class="fa fa-cab"></i> Tour Services</div></a></li>
-              <li><a href="/bookitin/transfer" target="_self"><div><i class="fa fa-bus"></i> Transfer Services</div></a></li>
-            </ul>
-          </li>
-          <li><a href="#"><div>Our Vehicles</div><span>What you will get</span></a>
-            <ul>
-              <li><a href="/vehicles/1" target="_self"><div>Rental Vehicles</div></a></li>
-              <li><a href="/vehicles/2" target="_self"><div>Transfer Vehicles</div></a></li>
-            </ul>
-          </li>
-          <li><a href="/about" target="_self"><div>About</div><span>Few word</span></a> </li>
-          <li><a href="/contact" target="_self"><div>Contact</div><span>Need help</span></a> </li>
-          <li><a href="/login" target="_self"><div>Login</div><span>Register</span></a> </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+header#header
+  #header-wrap
+    .container.clearfix
+      #primary-menu-trigger
+        i.icon-reorder
+      #logo
+        //- a.standard-logo(href='/', target='_self', data-dark-logo='img/logo-dark.png')
+          img(src='theme/images/logo.png', alt='Canvas Logo')
+        //-a.retina-logo(href='/', target='_self', data-dark-logo='img/logo-dark@2x.png')
+          img(src='img/logo@2x.png', alt='Canvas Logo')
+      nav#primary-menu.sub-title
+        ul
+          li
+            a(href='/', target='_self')
+              div Home
+              span Lets Start
+          li
+            a(href='#')
+              div BOOK IT IN
+              span Find options
+            ul
+              li
+                a(href='/bookitin/activity', target='_self')
+                  div
+                    i.fa.fa-map
+                    |  Activity Booking
+              li
+                a(href='/bookitin/rentalcar', target='_self')
+                  div
+                    i.fa.fa-car
+                    |  Rental Car
+              li
+                a(href='/bookitin/tour', target='_self')
+                  div
+                    i.fa.fa-cab
+                    |  Tour Services
+              li
+                a(href='/bookitin/transfer', target='_self')
+                  div
+                    i.fa.fa-bus
+                    |  Transfer Services
+          li
+            a(href='#')
+              div Our Vehicles
+              span What you will get
+            ul
+              li
+                a(href='/vehicles/1', target='_self')
+                  div Rental Vehicles
+              li
+                a(href='/vehicles/2', target='_self')
+                  div Transfer Vehicles
+          li
+            a(href='/about', target='_self')
+              div About
+              span Few word
+          li
+            a(href='/contact', target='_self')
+              div Contact
+              span Need help
+          li
+            a(href='/login', target='_self')
+              div Login
+              span Register

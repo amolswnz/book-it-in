@@ -1,5 +1,11 @@
+HTML View source incorrect
+
+
 GET /theme/ng-lib/angular-material-datetimepicker.min.map 404 1.646 ms - 191
   Fix - add https://github.com/logbon72/angular-material-datetimepicker from repo to npm modules
 
 
 https://stackoverflow.com/questions/22791174/how-to-show-a-placeholder-image-before-the-real-image-is-downloaded
+
+
+https://scotch.io/tutorials/angular-routing-using-ui-router

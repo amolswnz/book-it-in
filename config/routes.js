@@ -17,16 +17,21 @@ module.exports = function(app) {
   app.get('/bookitin/transfer', function(req, res) {
     res.render('app/transfer/index');
   });
+
   app.get('/login', function(req, res) {
     res.render('app/user/index');
   });
+  // app.post('/login')
+  app.get('/test', function(req, res) {
+    res.render('app/test/test')
+  });
 
-  var user = require('../modules/user/user.controller');
-  app.route('/api/user')
-    .get(user.readAllUsers)
-    .post(user.createUser);
-  app.route('/api/user/:id')
-    .get(user.readUser)
-    .put(user.updateUser)
-    .delete(user.deleteUser);
+  // var user = require('./../models/user/user.model');
+  // app.route('/api/user')
+  //   .get(user.readAllUsers);
+  // //   .post(user.createUser);
+  // // app.route('/api/user/:id')
+  // //   .get(user.readUser)
+  // //   .put(user.updateUser)
+  // //   .delete(user.deleteUser);
 };

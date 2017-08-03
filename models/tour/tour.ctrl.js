@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 //Load all your models
-var Activity = require('./activity.model.js');
+var Tour = require('./tour.model.js');
 
 //Now, this call won't fail because User has been added as a schema.
-mongoose.model('Activity');
+mongoose.model('Tour');
 
 module.exports = {
   // Get all
   findAll: function(req, res) {
-    Activity.find({}, function(err, data) {
+    Tour.find({}, function(err, data) {
       if (err) {
         throw new Error(err);
       }
@@ -19,7 +19,7 @@ module.exports = {
 
   // Find one by id
   findOne: function(req, res) {
-    Activity.findById(req.params.id, function(err, data) {
+    Tour.findById(req.params.id, function(err, data) {
       if (err) {
         throw new Error(err);
       }
@@ -28,8 +28,8 @@ module.exports = {
   },
 
   findAllByCity: function(req, res) {
-    Activity.find({
-      cityName: req.params.city
+    Tour.find({
+      startCity: req.params.city
     }, function(err, data) {
       if (err) {
         throw new Error(err);

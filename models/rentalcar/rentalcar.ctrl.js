@@ -27,9 +27,20 @@ module.exports = {
     });
   },
 
-  findOneByCity: function(req, res) {
+  findAllByCity: function(req, res) {
     Rentalcar.find({
       cityName: req.params.city
+    }, function(err, data) {
+      if (err) {
+        throw new Error(err);
+      }
+      res.json(data);
+    });
+  },
+
+  findOneByType: function(req, res) {
+    Rentalcar.find({
+      carType: req.params.type
     }, function(err, data) {
       if (err) {
         throw new Error(err);

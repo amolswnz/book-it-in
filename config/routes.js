@@ -27,31 +27,33 @@ module.exports = function(app) {
   });
 
   // app.get('/activity', function(req, res) {
-    // var rest = require('../models/activity/activity.ctrl');
-    // console.log(rest.findAll);
+  // var rest = require('../models/activity/activity.ctrl');
+  // console.log(rest.findAll);
   // });
 
   var activityCtrl = require('../models/activity/activity.ctrl');
   app.get('/activity', activityCtrl.findAll);
   app.get('/activity/:id', activityCtrl.findOne);
-  app.get('/activity/city/:city', activityCtrl.findOneByCity);
+  app.get('/activity/city/:city', activityCtrl.findAllByCity);
   app.get('/activity/:abc/:def/:ghi', activityCtrl.findX);
 
 
   var rentalcarCtrl = require('../models/rentalcar/rentalcar.ctrl');
   app.get('/rentalcar', rentalcarCtrl.findAll);
   app.get('/rentalcar/:id', rentalcarCtrl.findOne);
-  app.get('/rentalcar/city/:city', rentalcarCtrl.findOneByCity);
+  app.get('/rentalcar/city/:city', rentalcarCtrl.findAllByCity);
+  app.get('/rentalcar/type/:type', rentalcarCtrl.findOneByType);
+
+  var tourCtrl = require('../models/tour/tour.ctrl');
+  app.get('/tour', tourCtrl.findAll);
+  app.get('/tour/:id', tourCtrl.findOne);
+  app.get('/tour/city/:city', tourCtrl.findAllByCity);
 
   // var transferCtrl = require('../models/transfer/transfer.ctrl');
   // app.get('/transfer', transferCtrl.findAll);
   // app.get('/transfer/:id', transferCtrl.findOne);
-  // app.get('/transfer/city/:city', transferCtrl.findOneByCity);
+  // app.get('/transfer/city/:city', transferCtrl.findAllByCity);
 
-  // var tourCtrl = require('../models/tour/tour.ctrl');
-  // app.get('/tour', tourCtrl.findAll);
-  // app.get('/tour/:id', tourCtrl.findOne);
-  // app.get('/tour/city/:city', tourCtrl.findOneByCity);
 
   // var user = require('./../models/user/user.model');
   // app.route('/api/user')

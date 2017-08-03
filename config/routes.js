@@ -35,6 +35,7 @@ module.exports = function(app) {
   app.get('/activity', activityCtrl.findAll);
   app.get('/activity/:id', activityCtrl.findOne);
   app.get('/activity/city/:city', activityCtrl.findAllByCity);
+  app.get('/activity/distinct/cities', activityCtrl.findOnlyCities);
   app.get('/activity/:abc/:def/:ghi', activityCtrl.findX);
 
 

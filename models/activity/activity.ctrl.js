@@ -37,6 +37,15 @@ module.exports = {
     });
   },
 
+  findOnlyCities: function(req, res) {
+    Activity.distinct("cityName", function(err, data) {
+      if (err) {
+        throw new Error(err);
+      }
+      res.json(data);
+    });
+  },
+
   findX: function(req, res) {
     console.log(req.params.abc, req.params.def);
     res.json({

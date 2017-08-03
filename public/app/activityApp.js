@@ -23,7 +23,8 @@
       $routeProvider
         .when('/bookitin/activity', {
           templateUrl: '/partials/activity/view',
-          controller: 'ActivityCtrl'
+          controller: 'ActivityCtrl',
+          controllerAs: 'vm'
         });
     });
 }());

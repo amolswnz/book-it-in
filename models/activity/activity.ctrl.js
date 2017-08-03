@@ -12,7 +12,6 @@ module.exports = {
       if (err) {
         throw new Error(err);
       }
-      console.log('data', data);
       res.json(data);
     });
   },

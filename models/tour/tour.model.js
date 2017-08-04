@@ -10,7 +10,7 @@ var TourSchema = new Schema({
     enum: ['North Island', 'South Island', 'NA'],
     default: 'NA'
   },
-  "price": Number,
+  "price": Object,
   "status": {
     type: String,
     enum: ['Active', 'Inactive', 'NA'],

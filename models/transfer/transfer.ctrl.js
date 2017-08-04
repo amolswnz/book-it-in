@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 //Load all your models
-var Tour = require('./tour.model.js');
+var Transfer = require('./transfer.model.js');
 
 //Now, this call won't fail because User has been added as a schema.
-mongoose.model('Tour');
+mongoose.model('Transfer');
 
 module.exports = {
   // Get all
   findAll: function(req, res) {
-    Tour.find({}, function(err, data) {
+    Transfer.find({}, function(err, data) {
       if (err) {
         throw new Error(err);
       }
@@ -17,8 +17,8 @@ module.exports = {
   },
 
   // Find one by id
-  findTourCost: function(req, res) {
-    Tour.findById(req.params.id, function(err, data) {
+  findTransferCost: function(req, res) {
+    Transfer.findById(req.params.id, function(err, data) {
       if (err) {
         throw new Error(err);
       }
@@ -26,8 +26,8 @@ module.exports = {
     });
   },
 
-  findCityTours: function(req, res) {
-    Tour.find({
+  findCityTransfers: function(req, res) {
+    Transfer.find({
       startCity: req.params.city
     }, function(err, data) {
       if (err) {
@@ -37,8 +37,8 @@ module.exports = {
     });
   },
 
-  findTourCities: function(req, res) {
-    Tour.distinct("startCity", function(err, data) {
+  findTransferCities: function(req, res) {
+    Transfer.distinct("startCity", function(err, data) {
       if (err) {
         throw new Error(err);
       }

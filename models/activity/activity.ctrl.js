@@ -17,7 +17,7 @@ module.exports = {
   },
 
   // Find one by id
-  findOne: function(req, res) {
+  findActivityCost: function(req, res) {
     Activity.findById(req.params.id, function(err, data) {
       if (err) {
         throw new Error(err);
@@ -26,7 +26,7 @@ module.exports = {
     });
   },
 
-  findAllByCity: function(req, res) {
+  findCityActivities: function(req, res) {
     Activity.find({
       cityName: req.params.city
     }, function(err, data) {
@@ -37,7 +37,7 @@ module.exports = {
     });
   },
 
-  findOnlyCities: function(req, res) {
+  findActivityCities: function(req, res) {
     Activity.distinct("cityName", function(err, data) {
       if (err) {
         throw new Error(err);

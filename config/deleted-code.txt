@@ -1,0 +1,21 @@
+
+  // app.get('/activity', function(req, res) {
+  // var rest = require('../models/activity/activity.ctrl');
+  // console.log(rest.findAll);
+  // });
+
+  // app.get('/activity/:id', activityCtrl.findOne);
+// app.get('/activity/city/:city', activityCtrl.findAllByCity);
+// app.get('/activity/distinct/cities', activityCtrl.findOnlyCities);
+// app.get('/activity/:abc/:def/:ghi', activityCtrl.findX);
+
+
+
+  // var user = require('./../models/user/user.model');
+  // app.route('/api/user')
+  //   .get(user.readAllUsers);
+  // //   .post(user.createUser);
+  // // app.route('/api/user/:id')
+  // //   .get(user.readUser)
+  // //   .put(user.updateUser)
+  // //   .delete(user.deleteUser);

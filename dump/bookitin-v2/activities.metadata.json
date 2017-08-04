@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"bookitin-v2.activities"},{"v":1,"key":{"regNo":1},"name":"regNo_1","ns":"bookitin-v2.activities","background":true},{"v":1,"key":{"activityName":1},"name":"activityName_1","ns":"bookitin-v2.activities","background":true}]}

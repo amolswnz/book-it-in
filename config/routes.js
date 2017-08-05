@@ -19,6 +19,11 @@ module.exports = function(app) {
   });
 
   app.get('/login', function(req, res) {
+    // If session exists redirect to profile page
+    if(typeof req.session.passport != 'undefined')
+      // return res.send({ user: req.session.passport.user });
+      res.redirect('/user/profile/' + req.session.passport.user._id);
+
     res.render('app/user/index');
   });
   // app.post('/login')
@@ -128,52 +133,6 @@ module.exports = function(app) {
         });
       });
     })(req, res, next);
-  });
-
-  // Check on login page if the user is already logged in or not
-  app.get('/user/login', function(req, res, next) {
-
-    // console.log(req.session.user, req.session);
-    res.send(req.session);
-    // if (req.locals.someuser) {
-    //   console.log('someuser', req.locals.someuser);
-    //   res.send(req.locals.someuser);
-    // }
-    // passport.authenticate('local', function(err, user, info) {
-    //   if (err) {
-    //     console.log('get error', err);
-    //     return res.send({
-    //       error: err
-    //     });
-    //   }
-    //   if (!user) {
-    //     console.log('get !user ', user);
-    //     return res.send({
-    //       error: 'User details not found or user looged out'
-    //     });
-    //   }
-    //   req.logIn(user, function(err) {
-    //     console.log('get logIn', user);
-    //     if (err) {
-    //       console.log('get logIn err ', err);
-    //       return res.send({
-    //         error: err
-    //       });
-    //     }
-    //     return res.send({
-    //       user: user
-    //     });
-    //   });
-    // })(req, res, next);
-  });
-
-  // Save session varible in global varible someuser
-  app.use(function(req, res, next) {
-    if (req.session.passport) {
-      res.locals.someuser = req.session.passport.user;
-    }
-    res.locals.someVar = 'SomeVariable value';
-    next();
   });
 
   app.get('/user/profile/:id', function(req, res) {

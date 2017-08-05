@@ -10,7 +10,7 @@ var bcrypt = require('bcryptjs');
 module.exports = {
   register: function(req, res) {
     var newUser = new User(req.body);
-    console.log('register', newUser);
+    // console.log('register', newUser);
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(newUser.password, salt, function(err, hash) {
         newUser.password = hash;
@@ -25,17 +25,22 @@ module.exports = {
     var query = {
       email: email
     };
-    console.log('getUserByEmail', query);
+    // console.log('getUserByEmail', query);
     User.findOne(query, callback);
   },
 
   findOne: function(req, res) {
     User.findOne(query, {password: 0}, callback);
-    console.log('find one', req.body);
+    // console.log('find one', req.body);
+  },
+
+  findById: function(id, callback) {
+    User.findById(id, callback);
+    // console.log('getUserById',id);
   },
 
   comparePassword: function(candidatePwd, hash, callback) {
-    console.log('comparePassword', candidatePwd, hash);
+    // console.log('comparePassword', candidatePwd, hash);
     bcrypt.compare(candidatePwd, hash, function(err, isMatch) {
       callback(null, isMatch);
     });

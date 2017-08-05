@@ -57,9 +57,6 @@ module.exports = function(app) {
 
   var userCtrl = require('../models/user/user.ctrl');
   app.post('/user/register', userCtrl.register);
-  app.get('/user/:username', function(req, res) {
-    res.send('logged in ');
-  });
   app.get('/user/logout', function(req, res) {
     req.logout();
     res.send('logged out');
@@ -84,7 +81,7 @@ module.exports = function(app) {
         console.log('user', user);
         User.comparePassword(password, user.password, function(err, isMatch) {
           if (err) return done(err);
-          console.log('isMatch', isMatch);
+          // console.log('isMatch', isMatch);
           if (isMatch) {
             // res.send('password matched');
             return done(null, user);
@@ -104,55 +101,106 @@ module.exports = function(app) {
       if (err) {
         console.log('post error', err);
         // return next(err);
-        return res.send({ error: err});
+        return res.send({
+          error: err
+        });
       }
       if (!user) {
         console.log('post !user ', user);
         // return res.redirect('/user/login');
-        return res.send({error: 'Invalid Email ID or passwords'});
+        return res.send({
+          error: 'Invalid Email ID or passwords'
+        });
       }
       req.logIn(user, function(err) {
-        console.log('post logIn', user);
+        // console.log('post logIn', user);
         if (err) {
-          console.log('post logIn err ', err);
+          // console.log('post logIn err ', err);
           // return next(err);
-          return res.send({ error: err });
+          return res.send({
+            error: err
+          });
         }
-        return res.send({ user: user });
+        console.log(req.session);
+        // return res.redirect('/user/profile/' + user._id);
+        return res.send({
+          user: user
+        });
       });
     })(req, res, next);
   });
 
   // Check on login page if the user is already logged in or not
   app.get('/user/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-      if (err) {
-        console.log('get error', err, user);
-        return next(err);
-      }
-      if (!user) {
-        console.log('get !user ', err, user);
-        return res.redirect('/user/login');
-      }
-      req.logIn(user, function(err) {
-        console.log('get logIn', err, user);
-        if (err) {
-          return next(err);
-        }
-        return res.redirect('/user/' + user.username);
-      });
-    })(req, res, next);
+
+    // console.log(req.session.user, req.session);
+    res.send(req.session);
+    // if (req.locals.someuser) {
+    //   console.log('someuser', req.locals.someuser);
+    //   res.send(req.locals.someuser);
+    // }
+    // passport.authenticate('local', function(err, user, info) {
+    //   if (err) {
+    //     console.log('get error', err);
+    //     return res.send({
+    //       error: err
+    //     });
+    //   }
+    //   if (!user) {
+    //     console.log('get !user ', user);
+    //     return res.send({
+    //       error: 'User details not found or user looged out'
+    //     });
+    //   }
+    //   req.logIn(user, function(err) {
+    //     console.log('get logIn', user);
+    //     if (err) {
+    //       console.log('get logIn err ', err);
+    //       return res.send({
+    //         error: err
+    //       });
+    //     }
+    //     return res.send({
+    //       user: user
+    //     });
+    //   });
+    // })(req, res, next);
+  });
+
+  // Save session varible in global varible someuser
+  app.use(function(req, res, next) {
+    if (req.session.passport) {
+      res.locals.someuser = req.session.passport.user;
+    }
+    res.locals.someVar = 'SomeVariable value';
+    next();
+  });
+
+  app.get('/user/profile/:id', function(req, res) {
+    res.render('app/user/profile');
   });
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    console.log('serializeUser');
+    var sessionUser = {
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    };
+    done(null, sessionUser);
   });
 
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
+  passport.deserializeUser(function(sessionUser, done) {
+    console.log('deserializeUser');
+    done(null, sessionUser);
   });
+
+  // passport.deserializeUser(function(id, done) {
+  //   done(null, sessionUser)
+  //   // User.findById(id, function(err, user) {
+  //     // done(err, user);
+  //   // });
+  // });
 
 
   app.get('/test', function(req, res) {

@@ -7,6 +7,10 @@
       vm.asdklfj = "adsf";
       // $scope.txt = "Hello from LoginRegisterCtrl Controller";
       console.log('-- inside user ctrl');
+      vm.login = {
+        email : "zidepyliho@yahoo.com"
+      };
+      // vm.login.
 
 
       vm.loginClick = function() {

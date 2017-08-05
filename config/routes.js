@@ -20,13 +20,18 @@ module.exports = function(app) {
 
   app.get('/login', function(req, res) {
     // If session exists redirect to profile page
-    if(typeof req.session.passport != 'undefined')
-      // return res.send({ user: req.session.passport.user });
-      res.redirect('/user/profile/' + req.session.passport.user._id);
+    if (typeof req.session.passport != 'undefined')
+      if (typeof req.session.passport.user != 'undefined')
+        res.redirect('/user/profile/' + req.session.passport.user._id);
 
     res.render('app/user/index');
   });
-  // app.post('/login')
+
+  app.get('/logout', function (req, res) {
+    app.locals.loggedin = false;
+    req.logout();
+    res.redirect('/');
+  });
 
   // Detailed information in bookitin.numbers User Story
   var activityCtrl = require('../models/activity/activity.ctrl');
@@ -126,8 +131,8 @@ module.exports = function(app) {
             error: err
           });
         }
-        console.log(req.session);
-        // return res.redirect('/user/profile/' + user._id);
+        // return res.redirect('/user/profile/' + req.session.passport.user._id);
+        app.locals.loggedin = true;
         return res.send({
           user: user
         });
@@ -135,7 +140,7 @@ module.exports = function(app) {
     })(req, res, next);
   });
 
-  app.get('/user/profile/:id', function(req, res) {
+  app.get('/user/profile/:id', ensureAuthenticated, function(req, res) {
     res.render('app/user/profile');
   });
 
@@ -153,6 +158,22 @@ module.exports = function(app) {
     console.log('deserializeUser');
     done(null, sessionUser);
   });
+
+  function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    res.redirect('/login');
+  }
+
+
+  app.get('/profile', function(req, res) {
+    res.render('app/user/profile');
+  });
+
+    app.get('/bookings', function(req, res) {
+      res.render('app/user/bookings');
+    });
+
 
   // passport.deserializeUser(function(id, done) {
   //   done(null, sessionUser)

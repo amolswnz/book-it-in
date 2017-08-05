@@ -58,7 +58,24 @@ header#header
             a(href='/contact', target='_self')
               div Contact
               span Need help
-          li(class=isLoginActive)
-            a(href='/login', target='_self')
-              div Login
-              span Register
+          if ! loggedin 
+            li(class=isLoginActive)
+              a(href='/login', target='_self')
+                div Login
+                span Register
+          else
+            li(class=isBookingActive)
+              a(href='#')
+                div Profile
+                span Your info
+              ul
+                li
+                  a(href='/bookings', target='_self')
+                    div Your bookings
+                li
+                  a(href='/profile', target='_self')
+                    div Update Profile
+                li
+                  a(href='/logout', target='_self')
+                    div Logout
+            

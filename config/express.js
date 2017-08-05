@@ -40,4 +40,13 @@ module.exports = function(app, config) {
   if (app.get('env') === 'development') {
     app.locals.pretty = true;
   }
+
+  // Save session varible in global varible someuser
+app.use(function(req, res, next) {
+  if (req.session.passport) {
+    res.locals.someuser = req.session.passport.user;
+  }
+  res.locals.someVar = 'SomeVariable value';
+  next();
+});
 };

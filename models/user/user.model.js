@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/test');
-
-var db = mongoose.connection;
+var Schema = mongoose.Schema;
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -25,7 +22,3 @@ var UserSchema = mongoose.Schema({
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);
-
-module.exports.createUser = function(newUser, callback) {
-  newUser.save(callback);
-};

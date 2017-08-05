@@ -23,7 +23,8 @@
       $routeProvider
         .when('/login', {
           templateUrl: '/partials/user/login',
-          controller: 'UserCtrl'
+          controller: 'LoginRegisterCtrl',
+          controllerAs: 'vm'
         });
     });
 }());

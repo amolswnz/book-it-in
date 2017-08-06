@@ -40,3 +40,20 @@ body {
   border-radius: 4px;
   /*display: none;*/
 }
+
+
+md-toast.md-success-toast-theme .md-toast-content {
+  background-color: rgb(102, 187, 106) !important;
+}
+
+md-toast.md-info-toast-theme .md-toast-content {
+  background-color: rgb(41, 182, 246) !important;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+  background-color: rgb(239, 83, 80) !important;
+}
+
+md-toast.md-warn-toast-theme .md-toast-content {
+  background-color: rgb(255, 150, 0) !important;
+}

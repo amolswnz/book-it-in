@@ -1,8 +1,15 @@
 (function() {
   'use strict';
-  angular.module('userApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
+  angular.module('loginApp', ['ngResource', 'ngRoute', 'angular-loading-bar', 'ngMaterial', 'ngMessages'], function($mdThemingProvider) {
+    var vrTheme = $mdThemingProvider.theme('vrTheme', 'default');
+    var vrPalette = $mdThemingProvider.extendPalette('blue', {
+      '500': '#b19259'
+    });
+    $mdThemingProvider.definePalette('vrPalette', vrPalette);
+    vrTheme.primaryPalette('vrPalette');
+  });
 
-  angular.module('userApp')
+  angular.module('loginApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
       $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         console.log('Current route name: ' + $location.path());
@@ -16,13 +23,13 @@
       });
 
       // /partials = /public/app defined in express.js
-      console.log('- inside angular module userApp before routing');
+      console.log('- inside angular module loginApp before routing');
 
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
         .when('/login', {
-          templateUrl: '/partials/user/login',
+          templateUrl: '/partials/login/login',
           controller: 'LoginRegisterCtrl',
           controllerAs: 'vm'
         });

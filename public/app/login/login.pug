@@ -1,0 +1,39 @@
+.col_one_third.nobottommargin
+  .well.well-lg.nobottommargin
+    form#login-form.nobottommargin(name='login-form',novalidate)
+      h3 Login to your Account
+      .col_full
+        //- input#login-form-email.form-control(type='email', name='login-form-email', ng-model='vm.login.email' readonly)
+        input#login-form-email.form-control(type='email', name='login-form-email', ng-model='vm.login.email' ng-readonly="vm.isRegistered")
+      .col_full
+        label(for='login-form-password') Password:
+        input#login-form-password.form-control(type='password', name='login-form-password', ng-model='vm.login.password')
+      .col_full.nobottommargin
+        button#login-form-submit.button.button-3d.nomargin(name='login-form-submit', value='login' ng-click="vm.loginClick()") Login
+        a.fright(href='#') Forgot Password?
+        h4=result
+if !result
+  .col_two_third.col_last.nobottommargin
+    h3 Don't have an Account? Register Now.
+    h4(class='debug') {{ vm.txt }}
+    p.terms_and_conditions By creating an account, you will get the BEST price guaranteed.
+    form#register-form.nobottommargin(name='register-form',novalidate)
+      .col_one_third
+        label(for='register-form-name') Name:
+        input#register-form-name.form-control(type='text', name='register-form-name', ng-model='vm.register.name')
+      .col_one_third
+        label(for='register-form-email') Email Address:
+        input#register-form-email.form-control(type='email', name='register-form-email', ng-model='vm.register.email')
+      .col_one_third.col_last
+        label(for='register-form-password') Choose Password:
+        input#register-form-password.form-control(type='password', name='register-form-password', ng-model='vm.register.password')
+      .clear
+      .col_full.nobottommargin
+        button#register-form-submit.button.button-3d.button-black(name='register-form-submit', ng-click="vm.registerClick()", value='register') Register Now
+    p.terms_and_conditions
+      | By creating an account, you're agreeing with our 
+      a(href='#', target='_blank') Terms and Conditions
+      | and 
+      a(href='#', target='_blank') Privacy Statement
+      | .
+    p(class='terms_and_conditions') Interested in #[a(href='#') BookItIn.co.nz for Business?]

@@ -58,21 +58,21 @@ header#header
             a(href='/contact', target='_self')
               div Contact
               span Need help
-          if ! loggedin 
+          if ! isLoggedIn 
             li(class=isLoginActive)
               a(href='/login', target='_self')
                 div Login
                 span Register
           else
-            li(class=isBookingActive)
+            li(class=isLoggedInActive)
               a(href='#')
                 div Profile
                 span Your info
               ul
-                li
+                li(class=isBookingsActive)
                   a(href='/bookings', target='_self')
                     div Your bookings
-                li
+                li(class=isProfileActive)
                   a(href='/profile', target='_self')
                     div Update Profile
                 li

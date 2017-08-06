@@ -24,11 +24,11 @@ module.exports = function(app) {
       if (typeof req.session.passport.user != 'undefined')
         res.redirect('/user/profile/' + req.session.passport.user._id);
 
-    res.render('app/user/index');
+    res.render('app/login/index');
   });
 
-  app.get('/logout', function (req, res) {
-    app.locals.loggedin = false;
+  app.get('/logout', function(req, res) {
+    app.locals.isLoggedIn = false;
     req.logout();
     res.redirect('/');
   });
@@ -132,7 +132,7 @@ module.exports = function(app) {
           });
         }
         // return res.redirect('/user/profile/' + req.session.passport.user._id);
-        app.locals.loggedin = true;
+        app.locals.isLoggedIn = true;
         return res.send({
           user: user
         });
@@ -143,6 +143,7 @@ module.exports = function(app) {
   app.get('/user/profile/:id', ensureAuthenticated, function(req, res) {
     res.render('app/user/profile');
   });
+  app.get('/user/email/:id', userCtrl.findDuplicateEmail);
 
   passport.serializeUser(function(user, done) {
     console.log('serializeUser');
@@ -166,13 +167,13 @@ module.exports = function(app) {
   }
 
 
-  app.get('/profile', function(req, res) {
-    res.render('app/user/profile');
+  app.get('/profile', ensureAuthenticated, function(req, res) {
+    res.render('app/user/profile/index');
   });
 
-    app.get('/bookings', function(req, res) {
-      res.render('app/user/bookings');
-    });
+  app.get('/bookings', ensureAuthenticated, function(req, res) {
+    res.render('app/user/bookings/index');
+  });
 
 
   // passport.deserializeUser(function(id, done) {

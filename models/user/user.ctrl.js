@@ -1,13 +1,24 @@
 var mongoose = require('mongoose');
 //Load all your models
 var User = require('./user.model.js');
-
 //Now, this call won't fail because User has been added as a schema.
 mongoose.model('User');
-
 var bcrypt = require('bcryptjs');
 
 module.exports = {
+
+  findDuplicateEmail: function(req, res) {
+    console.log('find by email', req.params.id);
+    User.findOne({
+      email: req.params.id
+    }, "email", function(err, data) {
+      if (err) {
+        throw new Error(err);
+      }
+      res.json(data);
+    });
+  },
+
   register: function(req, res) {
     var newUser = new User(req.body);
     // console.log('register', newUser);
@@ -20,17 +31,19 @@ module.exports = {
     });
   },
 
-
   getUserByEmail: function(email, callback) {
     var query = {
       email: email
     };
-    // console.log('getUserByEmail', query);
+    console.log('getUserByEmail', query);
     User.findOne(query, callback);
   },
 
+
   findOne: function(req, res) {
-    User.findOne(query, {password: 0}, callback);
+    User.findOne(query, {
+      password: 0
+    }, callback);
     // console.log('find one', req.body);
   },
 

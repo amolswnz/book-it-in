@@ -1,0 +1,21 @@
+$mdToast.show(
+  $mdToast.simple()
+  .textContent(response.data.error)
+  .position('bottom left')
+  .hideDelay(15000)
+  .theme("warn-toast")
+);
+$mdToast.show(
+  $mdToast.simple()
+  .textContent(response.data.error)
+  .position('bottom left')
+  .hideDelay(15000)
+  .theme("success-toast")
+);
+$mdToast.show(
+  $mdToast.simple()
+  .textContent(response.data.error)
+  .position('bottom left')
+  .hideDelay(15000)
+  .theme("info-toast")
+);

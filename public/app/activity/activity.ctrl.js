@@ -12,7 +12,7 @@
     //   };
     // }])
     //
-    .controller('ActivityCtrl', function($scope, $http) {
+    .controller('ActivityCtrl', function($http) {
       var vm = this;
       vm.txt = "Hello from activity Controller";
       console.log('-- inside activity ctrl');

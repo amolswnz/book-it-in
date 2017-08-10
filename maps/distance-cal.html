@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete Address Form</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+      body {
+        padding: 40px;
+      }
+      #output {
+        position: absolute;
+        top: 150px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="locationField">
+      Start Address
+      <input id="add1" placeholder="Enter your address"  type="text" style="width: 300px"></input>
+      <br /><br />
+      End Address
+      <input id="add2" placeholder="Enter your address"  type="text" style="width: 300px"></input>
+    </div>
+
+    <table id="address" style="display:none">
+      <tr>
+        <td class="label">Street address</td>
+        <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+        <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">City</td>
+        <!-- Note: Selection of address components in this example is typical.
+             You may need to adjust it for the locations relevant to your app. See
+             https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+        -->
+        <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input></td>
+        <td class="label">Zip code</td>
+        <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+      </tr>
+    </table>
+
+    <div id='output'></div>
+    <script>
+    var placeSearch, add1, add2;
+
+    function initAutocomplete() {
+      var input = document.getElementById('add1');
+      var options = {
+        types: ['geocode'],
+        componentRestrictions: {
+          country: 'nz'
+        }
+      };
+      add1 = new google.maps.places.Autocomplete(input, options);
+
+      var input = document.getElementById('add2');
+      var options = {
+        types: ['geocode'],
+        componentRestrictions: {
+          country: 'nz'
+        }
+      };
+      add2 = new google.maps.places.Autocomplete(input, options);
+      add2.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place1 = add1.getPlace();
+      // console.log(place);
+      // console.log(place1.geometry.location.lng());
+
+      var place2 = add2.getPlace();
+      // console.log(place2.geometry.location.lat());
+
+
+      var origin = {
+        lat: place1.geometry.location.lat(),
+        lng: place1.geometry.location.lng()
+      };
+      var destination = {
+        lat: place2.geometry.location.lat(),
+        lng: place2.geometry.location.lng()
+      };
+
+
+      var geocoder = new google.maps.Geocoder;
+
+      var service = new google.maps.DistanceMatrixService;
+      service.getDistanceMatrix({
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false
+      }, function(response, status) {
+        console.log(response);
+        if (status !== 'OK') {
+          alert('Error was: ' + status);
+        } else {
+          var originList = response.originAddresses;
+          var destinationList = response.destinationAddresses;
+          var outputDiv = document.getElementById('output');
+          outputDiv.innerHTML = '';
+          var totalKm = 0;
+          var totalMins = 0;
+
+          for (var i = 0; i < originList.length; i++) {
+            var results = response.rows[i].elements;
+            for (var j = 0; j < results.length; j++) {
+              outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
+                ': <br /><strong>' + results[j].distance.text + ' in ' +
+                results[j].duration.text + '</strong><br>';
+              totalKm = results[j].distance.value;
+              totalMins = results[j].duration.value;
+            }
+            // km minutes;
+            console.log(totalKm, duration);
+          }
+        }
+      });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMiC29G4FDk4htjwOGvJnZR7kqq6n0iLo&libraries=places&callback=initAutocomplete" async defer></script>
+  </body>
+</html>

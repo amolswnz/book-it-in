@@ -17,10 +17,10 @@
     }])
 
     .config(function($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-      });
+      // $locationProvider.html5Mode({
+      //   enabled: true,
+      //   requireBase: false
+      // });
 
       // /partials = /public/app defined in express.js
       console.log('- inside angular module tourApp before routing');
@@ -31,6 +31,11 @@
         .when('/bookitin/tour', {
           templateUrl: '/partials/tour/view',
           controller: 'TourCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/bookitin/tour/:city', {
+          templateUrl: '/partials/tour/view1',
+          controller: 'TourCtrl1',
           controllerAs: 'vm'
         });
     });

@@ -8,6 +8,7 @@
   function TourService($http, $log)  {
     return {
       getCities: getCities,
+      getActivities: getActivities
     };
     // Implementation
 
@@ -15,14 +16,23 @@
       return $http.get('/tour/cities')
         .then(getSuccess)
         .catch(getError);
-
-      function getSuccess(res) {
-        return res.data;
-      }
-
-      function getError(err) {
-        $log.error('XHR Failed for getAvengers.' + err.data);
-      }
     }
+
+    function getActivities(city) {
+      console.log('get tours');
+      return $http.get('/tour/city/' + city)
+        .then(getSuccess)
+        .catch(getError);
+    }
+
+
+    function getSuccess(res) {
+      return res.data;
+    }
+
+    function getError(err) {
+      $log.error('XHR Failed for getAvengers.' + err.data);
+    }
+
   }
 }());

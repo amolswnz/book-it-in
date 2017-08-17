@@ -2,17 +2,27 @@
   'use strict';
   angular
     .module('tourApp')
-    .controller('TourCtrl', TourCtrl);
+    .controller('TourCtrl1', TourCtrl1);
 
-  TourCtrl.$inject = ['TourService', '$log'];
+  TourCtrl1.$inject = ['TourService', '$log', '$routeParams'];
 
-  function TourCtrl(TourService, $log) {
+  function TourCtrl1(TourService, $log, $routeParams) {
     var vm = this;
 
     vm.cities = [];
     vm.bookings = {};
+    console.log('x');
 
     activate();
+
+
+    if($routeParams.city!==undefined) {
+      return TourService.getActivities($routeParams.city)
+        .then(function(data) {
+          vm.activities = data;
+          console.log(data);
+        });
+    }
 
     function activate() {
       return getCities().then(function() {

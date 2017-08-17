@@ -1,1 +1,14 @@
-h4(class='debug') {{ txt }}
+h4(class='debug' ng-repeat='city in vm.cities') {{ city }}
+form(name='bookingForm', ng-submit='vm.addBooking()', novalidate='')
+  md-input-container.md-block.col-md-3
+    label Select cities
+    md-select(ng-model='vm.bookings.cities', name='sadf')
+      md-option(ng-repeat='city in vm.cities') {{city}}
+  //- md-input-container
+  //-   <md-select ng-model="drink" placeholder="Drink" class="md-no-underline">
+  //-     <md-option value="water">Water</md-option>
+  //-     <md-option value="juice">Juice</md-option>
+  //-     <md-option value="milk">Milk</md-option>
+  //-     <md-option value="wine">Wine</md-option>
+  //-     <md-option value="mead">Mead</md-option>
+  //-   </md-select>

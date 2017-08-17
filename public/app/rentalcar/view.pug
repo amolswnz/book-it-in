@@ -1,33 +1,40 @@
-h4 Create Booking
-form(name='bookingForm', ng-submit='vm.addBooking()', novalidate='')
-  md-input-container.col-md-9
-    label Pickup location
-    input(ng-model="vm.booking.pickUpLocation", name='pickUpLocation', id='pickUpLocation', required='')
-    //- md-select(ng-model='vm.booking.pickUpLocation', name='pickUpLocation', required='')
-      md-option(ng-repeat='city in vm.cities | orderBy: city', value='{{city}}') {{city}}
-    div(ng-messages='bookingForm.pickUpLocation.$error', multiple='', md-auto-hide='false')
-      div(ng-message='required') Please select the pickup location.
-  md-input-container.md-block.col-md-3
-    label Pickup Date/Time
-    input(mdc-datetime-picker='', date='true', time='true', type='text', format='MMMM Do YYYY, h:mm a', min-date='minDate', max-date='dateTimeEnd', ng-model='dateTimeStart')
-  .clearfix
-  md-input-container.md-block.col-md-9
-    label Drop off Location
-    input(ng-model="vm.booking.dropOffLocation", name='dropOffLocation', id='dropOffLocation', required='')
-    div(ng-messages='bookingForm.dropOffLocation.$error', multiple='', md-auto-hide='false')
-      div(ng-message='required') Please select the drop off location.
-  md-input-container.md-block.col-md-3
-    label Drop-off Date/Time
-    input(mdc-datetime-picker='', date='true', time='true', type='text', format='MMMM Do YYYY, h:mm a', min-date='dateTimeStart', ng-model='dateTimeEnd')
+div(ng-hide='vm.booking.detail',class='ng-animate')
+  h4 Create Booking
+  form(name='bookingForm', ng-submit='vm.addBooking()', novalidate='')
+    md-input-container.col-md-9
+      label Pickup location
+      input(ng-model="vm.booking.pickUpLocation", name='pickUpLocation', id='pickUpLocation', required='', places-auto-complete='', types='{{vm.types}}' component-restrictions="{country:'nz'}", placeholder='')
+      //- md-select(ng-model='vm.booking.pickUpLocation', name='pickUpLocation', required='')
+        md-option(ng-repeat='city in vm.cities | orderBy: city', value='{{city}}') {{city}}
+      div(ng-messages='bookingForm.pickUpLocation.$error', multiple='', md-auto-hide='false')
+        div(ng-message='required') Please select the pickup location.
+    md-input-container.md-block.col-md-3
+      label Pickup Date/Time
+      input(mdc-datetime-picker='', date='true', time='true', type='text', format='MMMM Do YYYY, h:mm a', min-date='vm.minDate', ng-model='vm.booking.dateTimeStart', name='dateTimeStart')
+      div(ng-messages='bookingForm.dateTimeStart.$error', multiple='', md-auto-hide='false')
+        div(ng-message='required') Please select the pick up date and time.
+    .clearfix
+    md-input-container.md-block.col-md-9
+      label Drop off Location
+      input(ng-model="vm.booking.dropOffLocation", name='dropOffLocation', id='dropOffLocation', required='', places-auto-complete='', types='{{vm.types}}' component-restrictions="{country:'nz'}", placeholder='')
+      div(ng-messages='bookingForm.dropOffLocation.$error', multiple='', md-auto-hide='false')
+        div(ng-message='required') Please select the drop off location.
+    md-input-container.md-block.col-md-3
+      label Drop-off Date/Time
+      input(mdc-datetime-picker='', date='true', time='true', type='text', format='MMMM Do YYYY, h:mm a', min-date='vm.booking.dateTimeStart', ng-model='vm.booking.dateTimeEnd', name='dateTimeEnd')
+      div(ng-messages='bookingForm.dateTimeEnd.$error', multiple='', md-auto-hide='false')
+        div(ng-message='required') Please select the drop off date and time.
 
-  md-input-container.md-block.col-md-5
-    md-switch.md-primary(aria-label='Driver aged between 30 – 65 ?', ng-model='questionallmodels')
-      | Driver aged between 30 – 65 ?
-  md-input-container.md-block.col-md-7
-    button.button.button-reveal.button-large.tright(type='submit')
-      i.fa.fa-bolt
-      span Check Availability
-  
-  input(id='pickUpLocation1', required='')
+    md-input-container.md-block.col-md-5
+      md-switch.md-primary(aria-label='Driver aged between 30 – 65 ?', ng-model='vm.booking.driverAge')
+        | Driver aged between 30 – 65 ?
+    md-input-container.md-block.col-md-7
+      button.button.button-reveal.button-large.tright(type='submit')
+        i.fa.fa-bolt
+        span Check Availability
 
-  input(id='dropOffLocation1', required='')
+.clearfix
+
+div(ng-show='vm.booking.detail',class='animated fadeInLeft')
+  h4 View booking detail
+  p(class='debug') {{ vm.booking }}

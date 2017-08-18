@@ -12,6 +12,19 @@
     vm.cities = [];
     vm.bookings = {};
 
+    vm.minDate = new Date();
+    vm.bookings.bookingDate = [];
+
+    vm.bookings.adult = [];
+    vm.bookings.child = [];
+    vm.bookings.totalForThisActivity = [];
+
+    vm.bookings.price = {};
+    vm.bookings.price.totalAdult = [];
+    vm.bookings.price.totalChild = [];
+
+    vm.bookings.cartButton = [];
+
     activate();
 
     function activate() {
@@ -24,26 +37,53 @@
       return TourService.getCities()
         .then(function(data) {
           vm.cities = data;
-          console.log(vm);
           // return vm.cities;
         });
     }
 
     vm.showList = function() {
-      console.log(vm);
       if (typeof(vm.bookings.detail) !== false) {
         vm.bookings.detail = 1;
-        return TourService.getActivities(vm.bookings.city)
+        return TourService.getTours(vm.bookings.city)
           .then(function(data) {
-            vm.activities = data;
-            console.log(data);
+            vm.tours = data;
           });
-      }
-      else {
-        vm.bookings.detail = undefined;
+      } else {
+        vm.bookings.detail = 'undefined';
       }
     };
 
+    vm.addToCart = function(id) {
+      // console.log('id ', id);
+      // console.log('date', vm.bookings.bookingDate);
+      // console.log('cost', vm.bookings.totalForThisActivity);
+      if(vm.bookings.bookingDate.length===0)
+        return false;
+      console.log(id,vm.bookings.bookingDate);
+      // id
+      // vm.bookings.bookingDate[]
+      // vm.bookings.adult[]
+      // vm.bookings.child[]
+
+
+    };
+
+    vm.calculateAdultPrice = function(id, price) {
+      vm.bookings.price.totalAdult[id] = vm.bookings.adult[id] * price;
+      getTotalForThisActivity(id);
+    };
+    vm.calculateChildPrice = function(id, price) {
+      vm.bookings.price.totalChild[id] = vm.bookings.child[id] * price;
+      getTotalForThisActivity(id);
+    };
+
+    function getTotalForThisActivity(id) {
+      vm.bookings.totalForThisActivity[id] = 0;
+      if(vm.bookings.price.totalAdult[id] != null)
+        vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalAdult[id];
+      if(vm.bookings.price.totalChild[id] != null)
+        vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalChild[id];
+    }
   }
 
 

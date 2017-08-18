@@ -8,7 +8,7 @@
   function TourService($http, $log)  {
     return {
       getCities: getCities,
-      getActivities: getActivities
+      getTours: getTours
     };
     // Implementation
 
@@ -18,7 +18,7 @@
         .catch(getError);
     }
 
-    function getActivities(city) {
+    function getTours(city) {
       console.log('get tours');
       return $http.get('/tour/city/' + city)
         .then(getSuccess)

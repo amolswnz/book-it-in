@@ -17,7 +17,7 @@
 
 
     if($routeParams.city!==undefined) {
-      return TourService.getActivities($routeParams.city)
+      return TourService.getTours($routeParams.city)
         .then(function(data) {
           vm.activities = data;
           console.log(data);
@@ -43,7 +43,7 @@
       console.log(vm);
       if (typeof(vm.bookings.detail) !== false) {
         vm.bookings.detail = 1;
-        return TourService.getActivities(vm.bookings.city)
+        return TourService.getTours(vm.bookings.city)
           .then(function(data) {
             vm.activities = data;
             console.log(data);

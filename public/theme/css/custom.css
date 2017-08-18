@@ -115,3 +115,9 @@ md-toast.md-warn-toast-theme .md-toast-content {
 .animate-show-hide.ng-hide-remove {
   transition: all linear 1.5s;
 }
+.md-input[disabled] {
+  cursor: not-allowed;
+}
+.md-input-container.md-vrTheme-theme .md-input {
+  cursor: pointer;
+}

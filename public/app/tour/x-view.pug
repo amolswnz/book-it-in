@@ -1,0 +1,84 @@
+div(class='ng-animate')
+  form(name='citySelectionForm', ng-submit='vm.showList()', novalidate='')
+    md-input-container.md-block.col-md-2
+      h5 Select City
+    md-input-container.md-block.col-md-3
+      label Choose one
+      md-select(ng-model='vm.bookings.city', name='city', id='city', required='')
+        md-option(ng-repeat='city in vm.cities track by $index' value='{{city}}') {{city}}
+      div(ng-messages='citySelectionForm.city.$error', multiple='', md-auto-hide='false')
+        div(ng-message='required') Please select city first
+    md-input-container.md-block.col-md-7
+      button.button.button-mini.button-reveal.tright(type='submit')
+        i.fa.fa-bolt
+        span Show tours list
+
+.clearfix
+
+div(ng-show='vm.bookings.detail',class='animated fadeInLeft')
+  h4 Select tours
+  //- p(class='debug',ng-repeat='tour in vm.tours') {{ tour }}
+  form(name='tourSelectionForm', ng-submit='vm.addBooking()', novalidate='')
+    div.row
+      div.col-md-4(ng-repeat-start='tour in vm.tours')
+        div(class='promo promo-border promo-mini')
+          div.row
+            div.col-md-12
+              p.text-center {{ tour.details }}
+          div.row
+            div.col-md-4
+              | Adult {{ tour.price.adult | currency}}
+            div.col-md-4
+              | Qty
+            div.col-md-4
+              | Date
+          div.row
+            div.col-md-4
+              Child {{ tour.price.child | currency}}
+            div.col-md-4
+              Qty
+            div.col-md-4
+              Date
+          div.row
+            div.col-md-12          
+              p.text-center
+                button(class='button button-small button-rounded button-brown button-reveal tright')
+                  i.icon-trash2
+                  span Add to Booking
+      div.divider(ng-if="($index+1)%3==0")
+      div(ng-repeat-end="")
+
+    //- table.table.table-hover.table-condensed.borderless
+      thead
+        th #
+        th Name
+        th(width='5%') Unit Cost
+        th(width='5%') Qty
+        th(width='15%') Date
+        th(width='10%') Total Cost
+      tr(ng-repeat='tour in vm.tours')
+        td.vert-align
+          | {{ $index+1 }}
+        td.vert-align
+          | {{ tour.details }}
+        td.vert-align
+          md-input-container.md-icon-float.md-block
+            md-icon.fa.fa-dollar(md-font-icon='icon-group', ng-class='icon')
+            input(ng-model='tour.price', name='unitCost', ng-value='{{ tour.price.adult}}', format='currency', readonly='readonly')
+        td
+          md-select(ng-model='vm.bookings.quantities[$index]', name='qty[]', ng-change='vm.quantityChanged(tour.aId, vm.bookings.quantities[$index])')
+            md-option(ng-repeat='counter in counters', value='{{counter}}', placeholder='qty') {{counter}}
+        td
+          md-input-container(ng-show='vm.bookings.quantities[$index]')
+            input.md-input(mdc-datetime-picker='', date='true', time='false', type='text', format='MMMM Do YYYY', min-date='minDate', ng-model='vm.bookings.bookingDate[$index]', name='bookingDates[]')
+        td
+          md-input-container.md-icon-float.md-block(ng-show='vm.bookings.totalCost[$index] != 0')
+            md-icon.fa.fa-dollar(md-font-icon='icon-group', ng-class='icon')
+            input(ng-model='vm.bookings.totalCost[$index]', name='totalCost[]', currency='', readonly='readonly')
+      tr
+        td(colspan='6', ng-show='vm.bookings.grandTotal != 0')
+          h4.text-right Grand Total {{ vm.bookings.grandTotal | currency }} 
+
+    button.button.button-large.button-reveal.tright(type='submit')
+      i.fa.fa-bolt
+      span Add to my booking

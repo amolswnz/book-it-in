@@ -11,46 +11,52 @@ div(class='ng-animate')
     md-input-container.md-block.col-md-7
       button.button.button-mini.button-reveal.tright(type='submit')
         i.fa.fa-bolt
-        span Show activities list
-        
+        span Show tours list
+
 .clearfix
 
-    
 div(ng-show='vm.bookings.detail',class='animated fadeInLeft')
-  h4 Select activities
-  p(class='debug',ng-repeat='activity in vm.activities') {{ activity }}
-  form(name='activitySelectionForm', ng-submit='vm.addBooking()', novalidate='')
-    table.table.table-hover.table-condensed.borderless
-      thead
-        th #
-        th Name
-        th(width='5%') Unit Cost
-        th(width='5%') Qty
-        th(width='15%') Date
-        th(width='10%') Total Cost
-      tr(ng-repeat='activity in vm.activities')
-        td.vert-align
-          | {{ $index+1 }}
-        td.vert-align
-          | {{ activity.activityName }}
-        td.vert-align
-          md-input-container.md-icon-float.md-block
-            md-icon.fa.fa-dollar(md-font-icon='icon-group', ng-class='icon')
-            input(ng-model='activity.price', name='unitCost', ng-value='{{ activity.price}}', format='currency', readonly='readonly')
-        td
-          md-select(ng-model='activityCtrl.booking.quantities[$index]', name='qty[]', ng-change='activityCtrl.quantityChanged(activity.aId, activityCtrl.booking.quantities[$index])')
-            md-option(ng-repeat='counter in counters', value='{{counter}}', placeholder='qty') {{counter}}
-        td
-          md-input-container(ng-show='activityCtrl.booking.quantities[$index]')
-            input.md-input(mdc-datetime-picker='', date='true', time='false', type='text', format='MMMM Do YYYY', min-date='minDate', ng-model='activityCtrl.booking.bookingDate[$index]', name='bookingDates[]')
-        td
-          md-input-container.md-icon-float.md-block(ng-show='activityCtrl.booking.totalCost[$index] != 0')
-            md-icon.fa.fa-dollar(md-font-icon='icon-group', ng-class='icon')
-            input(ng-model='activityCtrl.booking.totalCost[$index]', name='totalCost[]', currency='', readonly='readonly')
-      tr
-        td(colspan='6', ng-show='activityCtrl.booking.grandTotal != 0')
-          h4.text-right Grand Total {{ activityCtrl.booking.grandTotal | currency }} 
-
-    button.button.button-large.button-reveal.tright(type='submit')
-      i.fa.fa-bolt
-      span Add to my booking
+  h4 Select tours
+  //- p(class='debug',ng-repeat='tour in vm.tours') {{ tour }}
+  form(name='tourSelectionForm', novalidate='')
+    div.row
+      div.col-md-4(ng-repeat-start='tour in vm.tours')
+        div(class='promo promo-border promo-mini')
+          p.text-center {{ tour.details }}
+          span.debug {{ tour._id }}
+          div.col-md-6 Adult {{ tour.price.adult | currency}}
+          div.col-md-6 Child {{ tour.price.child | currency}}
+          .clearfix
+          div.col-md-6 
+            md-input-container.md-block.nobottommargin
+              label.nomargin qty
+              input(ng-model='vm.bookings.adult[tour._id]', ng-change='vm.calculateAdultPrice(tour._id, tour.price.adult)')
+              //- div(ng-messages='tourSelectionForm["bookingDate" + $index].$error', multiple='', md-auto-hide='false')
+              //-   div(ng-message='required') Please select the date
+          div.col-md-6 
+            md-input-container.md-block.nobottommargin
+              label.nomargin qty
+              input(ng-model='vm.bookings.child[tour._id]', ng-change='vm.calculateChildPrice(tour._id, tour.price.child)')
+              //- div(ng-messages='tourSelectionForm["bookingDate" + $index].$error', multiple='', md-auto-hide='false')
+              //-   div(ng-message='required') Please select the date
+          div.col-md-12.text-center
+            span(ng-show='vm.bookings.price.totalAdult[tour._id]') Total Adult Cost {{ vm.bookings.price.totalAdult[tour._id] | currency }}
+            br
+            span(ng-show='vm.bookings.price.totalChild[tour._id]') Total Child Cost {{ vm.bookings.price.totalChild[tour._id] | currency }}
+          .clearfix
+          div.text-center.topmargin-sm
+            md-input-container.md-block.col-md-6
+              label Activity Date
+              input(mdc-datetime-picker='', date='true', time='false', type='text', format='MMMM Do YYYY', ng-required='vm.bookings.adult[tour._id]', min-date='vm.minDate', ng-model='vm.bookings.bookingDate[tour._id]', name='bookingDate$index')
+              div(ng-messages='tourSelectionForm["bookingDate" + $index].$error', multiple='', md-auto-hide='false')
+                div(ng-message='ng-required') Please select the date
+            .col-md-6(ng-show='vm.bookings.totalForThisActivity[tour._id]') 
+              strong Total Cost 
+              br
+              strong {{ vm.bookings.totalForThisActivity[tour._id] | currency }}
+          div.text-center
+            button(class='button button-small button-rounded button-brown button-reveal tright', ng-click='vm.addToCart(tour._id)', type='submit' ng-model='vm.bookings.cartButton[tour._id]')
+              i.icon-bolt
+              span Add to Booking
+      div.divider(ng-if="($index+1)%3==0")
+      div(ng-repeat-end="")

@@ -57,9 +57,28 @@
       // console.log('id ', id);
       // console.log('date', vm.bookings.bookingDate);
       // console.log('cost', vm.bookings.totalForThisActivity);
-      if(vm.bookings.bookingDate.length===0)
-        return false;
-      console.log(id,vm.bookings.bookingDate);
+      // console.log('date',vm.bookings.bookingDate[id]);
+      // if(vm.bookings.bookingDate[id]==null) {
+      //   console.log('null',vm.bookings.bookingDate[id]);
+      //   return false;
+      // }
+      //
+      var bookingData = {
+        'userId': 'somevalue',
+        'activity': {
+          'objId': id,
+          'adult': vm.bookings.adult[id],
+          'child': vm.bookings.child[id],
+          'dateBooked': vm.bookings.bookingDate[id]
+        }
+      };
+      return TourService.postBooking(bookingData)
+        .then(function(data) {
+          console.log(data);
+          // vm.tours = data;
+        });
+
+      // console.log(id,vm.bookings.bookingDate,vm.bookings.adult,vm.bookings.child);
       // id
       // vm.bookings.bookingDate[]
       // vm.bookings.adult[]
@@ -79,9 +98,9 @@
 
     function getTotalForThisActivity(id) {
       vm.bookings.totalForThisActivity[id] = 0;
-      if(vm.bookings.price.totalAdult[id] != null)
+      if (vm.bookings.price.totalAdult[id] != null)
         vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalAdult[id];
-      if(vm.bookings.price.totalChild[id] != null)
+      if (vm.bookings.price.totalChild[id] != null)
         vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalChild[id];
     }
   }

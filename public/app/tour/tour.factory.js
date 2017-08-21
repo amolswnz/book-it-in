@@ -1,14 +1,16 @@
 (function() {
   angular
     .module('tourApp')
-    .factory('TourService', TourService);
+    .service('TourService', TourService);
 
   TourService.$inject = ['$http', '$log'];
 
-  function TourService($http, $log)  {
+  function TourService($http, $log) {
     return {
       getCities: getCities,
-      getTours: getTours
+      getTours: getTours,
+
+      postBooking: postBooking
     };
     // Implementation
 
@@ -25,6 +27,11 @@
         .catch(getError);
     }
 
+    function postBooking(bookingData) {
+      return $http.post('/booking/save/activity', bookingData)
+        .then(getSuccess)
+        .catch(getError);
+    }
 
     function getSuccess(res) {
       return res.data;

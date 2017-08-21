@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var MongoStore = require('connect-mongo')(session);
+var mongoose = require('mongoose');
 
 module.exports = function(app, config) {
   // Define static views folder path and view engine
@@ -31,7 +33,12 @@ module.exports = function(app, config) {
   app.use(session({
     secret: 'some secret 0822',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    // Following lines are to save session even if server restarts
+    // maxAge: new Date(Date.now() + 3600000),
+    // store: new MongoStore({
+    //   mongooseConnection: mongoose.connection
+    // })
   }));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -42,11 +49,11 @@ module.exports = function(app, config) {
   }
 
   // Save session varible in global varible someuser
-app.use(function(req, res, next) {
-  if (req.session.passport) {
-    res.locals.someuser = req.session.passport.user;
-  }
-  res.locals.someVar = 'SomeVariable value';
-  next();
-});
+  // app.use(function(req, res, next) {
+  //   if (req.session.passport) {
+  //     res.locals.someuser = req.session.passport.user;
+  //   }
+  //   res.locals.someVar = 'SomeVariable value';
+  //   next();
+  // });
 };

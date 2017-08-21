@@ -133,6 +133,7 @@ module.exports = function(app) {
         }
         // return res.redirect('/user/profile/' + req.session.passport.user._id);
         app.locals.isLoggedIn = true;
+        global.userObjId = user._id;
         return res.send({
           user: user
         });
@@ -209,5 +210,9 @@ module.exports = function(app) {
   app.get('/xui', function(req, res) {
     res.render('app/xui/xui');
   });
+
+
+  var bookingCtrl = require('../models/booking/booking.ctrl');
+  app.post('/booking/save/activity', bookingCtrl.saveActivityBooking);
 
 };

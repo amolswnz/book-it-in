@@ -121,3 +121,12 @@ md-toast.md-warn-toast-theme .md-toast-content {
 .md-input-container.md-vrTheme-theme .md-input {
   cursor: pointer;
 }
+
+#toast-container
+{
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  overflow: visible !important;
+}

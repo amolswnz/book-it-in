@@ -12,8 +12,9 @@
 
       postBooking: postBooking
     };
-    // Implementation
 
+    // Implementation
+    
     function getCities() {
       return $http.get('/tour/cities')
         .then(getSuccess)

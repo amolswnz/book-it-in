@@ -37,13 +37,18 @@ module.exports = {
 
     Booking.findOneAndUpdate(query, update, options, function(err, data) {
       if (err) {
+        console.log(err);
         res.send({
-          err: "Data NOT saved.",
-          msg: err
+          success: false,
+          msg: "Error occured: Data NOT saved due to server problem",
+          //  <br> Please try again later
+          // More descriptive message can be saved in database
+          err: err
         });
       } else {
         res.send({
-          done: "Data saved."
+          success: true,
+          msg: "Done: Tour Booking data saved successfully"
         });
       }
     });

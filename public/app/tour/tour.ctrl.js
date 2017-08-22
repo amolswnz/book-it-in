@@ -4,9 +4,9 @@
     .module('tourApp')
     .controller('TourCtrl', TourCtrl);
 
-  TourCtrl.$inject = ['TourService', '$log'];
+  TourCtrl.$inject = ['TourService', '$log', '$mdToast'];
 
-  function TourCtrl(TourService, $log) {
+  function TourCtrl(TourService, $log, $mdToast) {
     var vm = this;
 
     vm.cities = [];
@@ -74,8 +74,38 @@
       };
       return TourService.postBooking(bookingData)
         .then(function(data) {
-          console.log(data);
+          console.log('data', data);
+          var msgTheme = data.success ? 'success-toast' : 'error-toast';
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent(data.msg)
+            .position('bottom right')
+              .hideDelay(15000)
+              .parent($("#toast-container"))
+              .theme(msgTheme)
+          )
+          // $mdToast.show(
+          //   $mdToast.simple({template: data.msg})
+          //   .position('bottom right')
+          //   .hideDelay(15000)
+          //   .parent($("#toast-container"))
+          //   .theme('error-toast')
+          // );
+          // $mdToast.show(
+          //   $mdToast.simple({
+          //     hideDelay: 30000,
+          //     position: 'bottom right',
+          //     template: data.msg,
+          //     // parent: $("#toast-container")
+          //   })
+          //   .theme('error-toast')
+          //   .parent($("#toast-container"))
+          // );
+          // );
+
           // vm.tours = data;
+        }).catch(function(err) {
+          console.log('err', err);
         });
 
       // console.log(id,vm.bookings.bookingDate,vm.bookings.adult,vm.bookings.child);

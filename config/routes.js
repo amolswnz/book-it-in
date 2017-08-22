@@ -211,6 +211,10 @@ module.exports = function(app) {
     res.render('app/xui/xui');
   });
 
+  app.get('/booking-cart', function(req, res) {
+    // res.render('app/cart/xui');
+    res.end('your current cart will be shown here');
+  });
 
   var bookingCtrl = require('../models/booking/booking.ctrl');
   app.post('/booking/save/activity', bookingCtrl.saveActivityBooking);

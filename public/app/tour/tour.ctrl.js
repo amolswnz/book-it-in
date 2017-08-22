@@ -24,6 +24,7 @@
     vm.bookings.price.totalChild = [];
 
     vm.bookings.cartButton = [];
+    vm.bookings.added = [];
 
     activate();
 
@@ -54,17 +55,7 @@
     };
 
     vm.addToCart = function(id) {
-      // console.log('id ', id);
-      // console.log('date', vm.bookings.bookingDate);
-      // console.log('cost', vm.bookings.totalForThisActivity);
-      // console.log('date',vm.bookings.bookingDate[id]);
-      // if(vm.bookings.bookingDate[id]==null) {
-      //   console.log('null',vm.bookings.bookingDate[id]);
-      //   return false;
-      // }
-      //
       var bookingData = {
-        'userId': 'somevalue',
         'activity': {
           'objId': id,
           'adult': vm.bookings.adult[id],
@@ -74,47 +65,20 @@
       };
       return TourService.postBooking(bookingData)
         .then(function(data) {
-          console.log('data', data);
           var msgTheme = data.success ? 'success-toast' : 'error-toast';
           $mdToast.show(
             $mdToast.simple()
             .textContent(data.msg)
             .position('bottom right')
-              .hideDelay(15000)
+              .hideDelay(4000)
               .parent($("#toast-container"))
               .theme(msgTheme)
-          )
-          // $mdToast.show(
-          //   $mdToast.simple({template: data.msg})
-          //   .position('bottom right')
-          //   .hideDelay(15000)
-          //   .parent($("#toast-container"))
-          //   .theme('error-toast')
-          // );
-          // $mdToast.show(
-          //   $mdToast.simple({
-          //     hideDelay: 30000,
-          //     position: 'bottom right',
-          //     template: data.msg,
-          //     // parent: $("#toast-container")
-          //   })
-          //   .theme('error-toast')
-          //   .parent($("#toast-container"))
-          // );
-          // );
-
-          // vm.tours = data;
+          );
+          console.log(vm.bookings.added);
+          vm.bookings.added[id] = true;
         }).catch(function(err) {
           console.log('err', err);
         });
-
-      // console.log(id,vm.bookings.bookingDate,vm.bookings.adult,vm.bookings.child);
-      // id
-      // vm.bookings.bookingDate[]
-      // vm.bookings.adult[]
-      // vm.bookings.child[]
-
-
     };
 
     vm.calculateAdultPrice = function(id, price) {

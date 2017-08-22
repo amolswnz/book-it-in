@@ -18,9 +18,12 @@ var BookingSchema = new Schema({
     }
   }],
   'tour': [{
+    _id: false,
     objId: Schema.Types.ObjectId,
     adult: Number,
     child: Number,
+    totalAdultCost: Number,
+    totalChildCost: Number,
     dateBooked: Date,
     created_at: {
       type: Date,
@@ -37,8 +40,10 @@ var BookingSchema = new Schema({
     }
   }],
   'transfer': [{
+    _id: false,
     objId: Schema.Types.ObjectId,
     pax: Number,
+    totalCost: Number,
     dateBooked: Date,
     created_at: {
       type: Date,

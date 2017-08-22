@@ -8,16 +8,52 @@ mongoose.model('Booking');
 module.exports = {
   // Save booking
 
-  saveActivityBooking: function(req, res) {
+  saveTourBooking: function(req, res) {
     console.log(req.body);
     var bookingData = new Booking();
     // console.log('sessionid', req.sessionID);
     var query = {
-      'user.tempId' : req.user != null ? req.user._id : req.sessionID
+      'user.tempId': req.user != null ? req.user._id : req.sessionID
     };
     var update = {
       $push: {
-        activity: req.body.activity
+        tour: req.body.tour
+      }
+    };
+    var options = {
+      upsert: true,
+      multi: false
+    };
+
+    Booking.findOneAndUpdate(query, update, options, function(err, data) {
+      if (err) {
+        console.log(err);
+        res.send({
+          success: false,
+          msg: "Error occured: Data NOT saved due to server problem",
+          //  <br> Please try again later
+          // More descriptive message can be saved in database
+          err: err
+        });
+      } else {
+        res.send({
+          success: true,
+          msg: "Done: Tour Booking data saved successfully"
+        });
+      }
+    });
+  },
+
+  saveTransferBooking: function(req, res) {
+    console.log(req.body);
+    var bookingData = new Booking();
+    // console.log('sessionid', req.sessionID);
+    var query = {
+      'user.tempId': req.user != null ? req.user._id : req.sessionID
+    };
+    var update = {
+      $push: {
+        transfer: req.body.transfer
       }
     };
     var options = {

@@ -46,14 +46,14 @@ div(ng-show='vm.bookings.detail',class='animated fadeInLeft')
           .clearfix
           div.text-center.topmargin-sm
             md-input-container.md-block.col-md-6
-              label Activity Date
+              label Tour Date
               input(mdc-datetime-picker='', date='true', time='false', type='text', format='MMMM Do YYYY', ng-required='vm.bookings.adult[tour._id]', min-date='vm.minDate', ng-model='vm.bookings.bookingDate[tour._id]', name='bookingDate$index', ng-disabled='vm.bookings.added[tour._id]')
               div(ng-messages='tourSelectionForm["bookingDate" + $index].$error', multiple='', md-auto-hide='false')
                 div(ng-message='ng-required') Please select the date
-            .col-md-6(ng-show='vm.bookings.totalForThisActivity[tour._id]') 
+            .col-md-6(ng-show='vm.bookings.totalForThisTour[tour._id]') 
               strong Total Cost 
               br
-              strong {{ vm.bookings.totalForThisActivity[tour._id] | currency }}
+              strong {{ vm.bookings.totalForThisTour[tour._id] | currency }}
           div.text-center
             button(class='button button-small button-rounded button-brown button-reveal tright', ng-click='vm.addToCart(tour._id)', type='submit', ng-model='vm.bookings.cartButton[tour._id]', ng-hide='vm.bookings.added[tour._id]')
               i.fa.fa-cart-plus

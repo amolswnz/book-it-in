@@ -1,35 +1,35 @@
 (function() {
   angular
-    .module('tourApp')
-    .service('TourService', TourService);
+    .module('transferApp')
+    .service('TransferService', TransferService);
 
-  TourService.$inject = ['$http', '$log'];
+  TransferService.$inject = ['$http', '$log'];
 
-  function TourService($http, $log) {
+  function TransferService($http, $log) {
     return {
       getCities: getCities,
-      getTours: getTours,
+      getTransfers: getTransfers,
 
       postBooking: postBooking
     };
 
     // Implementation
-    
+
     function getCities() {
-      return $http.get('/tour/cities')
+      return $http.get('/transfer/cities')
         .then(getSuccess)
         .catch(getError);
     }
 
-    function getTours(city) {
-      console.log('get tours');
-      return $http.get('/tour/city/' + city)
+    function getTransfers(city) {
+      console.log('get transfers');
+      return $http.get('/transfer/city/' + city)
         .then(getSuccess)
         .catch(getError);
     }
 
     function postBooking(bookingData) {
-      return $http.post('/booking/save/activity', bookingData)
+      return $http.post('/booking/save/transfer', bookingData)
         .then(getSuccess)
         .catch(getError);
     }

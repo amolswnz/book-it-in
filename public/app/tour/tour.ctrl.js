@@ -17,7 +17,7 @@
 
     vm.bookings.adult = [];
     vm.bookings.child = [];
-    vm.bookings.totalForThisActivity = [];
+    vm.bookings.totalForThisTour = [];
 
     vm.bookings.price = {};
     vm.bookings.price.totalAdult = [];
@@ -56,9 +56,11 @@
 
     vm.addToCart = function(id) {
       var bookingData = {
-        'activity': {
+        'tour': {
           'objId': id,
           'adult': vm.bookings.adult[id],
+          'totalAdultCost': vm.bookings.price.totalAdult[id],
+          'totalChildCost': vm.bookings.price.totalChild[id],
           'child': vm.bookings.child[id],
           'dateBooked': vm.bookings.bookingDate[id]
         }
@@ -83,19 +85,19 @@
 
     vm.calculateAdultPrice = function(id, price) {
       vm.bookings.price.totalAdult[id] = vm.bookings.adult[id] * price;
-      getTotalForThisActivity(id);
+      getTotalForThisTour(id);
     };
     vm.calculateChildPrice = function(id, price) {
       vm.bookings.price.totalChild[id] = vm.bookings.child[id] * price;
-      getTotalForThisActivity(id);
+      getTotalForThisTour(id);
     };
 
-    function getTotalForThisActivity(id) {
-      vm.bookings.totalForThisActivity[id] = 0;
+    function getTotalForThisTour(id) {
+      vm.bookings.totalForThisTour[id] = 0;
       if (vm.bookings.price.totalAdult[id] != null)
-        vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalAdult[id];
+        vm.bookings.totalForThisTour[id] += vm.bookings.price.totalAdult[id];
       if (vm.bookings.price.totalChild[id] != null)
-        vm.bookings.totalForThisActivity[id] += vm.bookings.price.totalChild[id];
+        vm.bookings.totalForThisTour[id] += vm.bookings.price.totalChild[id];
     }
   }
 

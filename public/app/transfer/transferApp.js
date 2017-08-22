@@ -1,6 +1,13 @@
 (function() {
   'use strict';
-  angular.module('transferApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
+  angular.module('transferApp', ['ngMaterial', 'ngMaterialDatePicker', 'ngMessages', 'ngRoute', 'angular-loading-bar', 'ngAnimate'], function($mdThemingProvider) {
+    var vrTheme = $mdThemingProvider.theme('vrTheme', 'default');
+    var vrPalette = $mdThemingProvider.extendPalette('blue', {
+      '500': '#b19259'
+    });
+    $mdThemingProvider.definePalette('vrPalette', vrPalette);
+    vrTheme.primaryPalette('vrPalette');
+  });
 
   angular.module('transferApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
@@ -23,7 +30,8 @@
       $routeProvider
         .when('/bookitin/transfer', {
           templateUrl: '/partials/transfer/view',
-          controller: 'TransferCtrl'
+          controller: 'TransferCtrl',
+          controllerAs: 'vm'
         });
     });
 }());

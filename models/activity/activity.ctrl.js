@@ -28,7 +28,7 @@ module.exports = {
 
   findCityActivities: function(req, res) {
     Activity.find({
-      cityName: req.params.city
+      city: req.params.city
     }, function(err, data) {
       if (err) {
         throw new Error(err);
@@ -38,7 +38,7 @@ module.exports = {
   },
 
   findActivityCities: function(req, res) {
-    Activity.distinct("cityName", function(err, data) {
+    Activity.distinct("city", function(err, data) {
       if (err) {
         throw new Error(err);
       }

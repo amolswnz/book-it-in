@@ -26,6 +26,9 @@
     vm.bookings.cartButton = [];
     vm.bookings.added = [];
 
+    // debug
+    vm.bookings.city = 'Auckland';
+
     activate();
 
     function activate() {

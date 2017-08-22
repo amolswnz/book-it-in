@@ -219,5 +219,6 @@ module.exports = function(app) {
   var bookingCtrl = require('../models/booking/booking.ctrl');
   app.post('/booking/save/tour', bookingCtrl.saveTourBooking);
   app.post('/booking/save/transfer', bookingCtrl.saveTransferBooking);
+  app.post('/booking/save/activity', bookingCtrl.saveActivityBooking);
 
 };

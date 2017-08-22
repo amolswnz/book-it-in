@@ -1,13 +1,6 @@
 (function() {
   'use strict';
-  angular.module('activityApp', [ 'ngMaterial', 'ngMaterialDatePicker', 'ngMessages', 'ngRoute', 'angular-loading-bar', 'ngAnimate' ], function($mdThemingProvider) {
-    var vrTheme = $mdThemingProvider.theme('vrTheme', 'default');
-    var vrPalette = $mdThemingProvider.extendPalette('blue', {
-      '500': '#b19259'
-    });
-    $mdThemingProvider.definePalette('vrPalette', vrPalette);
-    vrTheme.primaryPalette('vrPalette');
-  });
+  angular.module('activityApp', ['ngResource', 'ngRoute', 'angular-loading-bar']);
 
   angular.module('activityApp')
     .run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams) {
@@ -33,10 +26,5 @@
           controller: 'ActivityCtrl',
           controllerAs: 'vm'
         });
-        // .when('/bookitin/activity/:city', {
-        //   templateUrl: '/partials/activity/view1',
-        //   controller: 'ActivityCtrl1',
-        //   controllerAs: 'vm'
-        // });
     });
 }());

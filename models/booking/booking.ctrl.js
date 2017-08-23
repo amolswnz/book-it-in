@@ -114,6 +114,19 @@ module.exports = {
         });
       }
     });
+  },
+
+
+  getAll: function(req, res) {
+    console.log('getting bookings for', req.user._id);
+    Booking.findOne({
+      'user.tempId': req.user._id
+    }, function(err, data) {
+      if (err) {
+        throw new Error(err);
+      }
+      res.json(data);
+    });
   }
 
 

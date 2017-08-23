@@ -72,10 +72,6 @@ module.exports = function(app) {
   app.put('/user/profile/current', userCtrl.updateProfile);
   app.patch('/user/profile/current', userCtrl.updatePwd);
 
-  /********************************************** User booking-routes ****************************************/
-  app.get('/bookings', ensureAuthenticated, function(req, res) {
-    res.render('app/user/bookings/index');
-  });
 
 
 
@@ -87,15 +83,23 @@ module.exports = function(app) {
   app.get('/booking-cart', function(req, res) {
     res.end('your current cart will be shown here');
   });
+  /************************************** User booking-routes **************************************/
+  app.get('/bookings', ensureAuthenticated, function(req, res) {
+    res.render('app/user/bookings/index');
+  });
+  app.get('/bookings/all', /*ensureAuthenticated, */ bookingCtrl.getAll);
 
 
 
   /********************************************** USER AUTHENTICATION ****************************************/
   app.get('/login', function(req, res) {
     // If session exists redirect to profile page
-    if (typeof req.session.passport != 'undefined')
-      if (typeof req.session.passport.user != 'undefined')
-        res.redirect('/user/profile/' + req.session.passport.user._id);
+    if (typeof req.session.passport != 'undefined') {
+      if (typeof req.session.passport.user != 'undefined') {
+        app.locals.isLoggedIn = true;
+        res.redirect('/profile');
+      }
+    }
 
     res.render('app/user/login/index');
   });

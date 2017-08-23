@@ -18,8 +18,26 @@ block main-content
   section(id="content")
     div(class="content-wrap")
       div(class="container clearfix")
-        div(ng-view)
+        .col-md-3
+          h4 Quick Links
+          ul(class='nav nav-pills nav-stacked')
+            li
+              a(href='#/') All bookings
+            hr.nomargin
+            li
+              a(href='#/activity') Activity bookings
+            li
+              a(href='#/rentalcar') Rental car bookings
+            li
+              a(href='#/tour') Tour bookings
+            li
+              a(href='#/transfer') Transfer bookings
+        .col-md-9
+          div(ng-view)
+
+    #toast-container
 
 block additional-scripts
   script(src="/app/user/bookings/bookingsApp.js", type='text/javascript')
   script(src="/app/user/bookings/bookings.ctrl.js", type='text/javascript')
+  script(src="/app/user/bookings/bookings.service.js", type='text/javascript')

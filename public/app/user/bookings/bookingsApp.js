@@ -17,10 +17,10 @@
     }])
 
     .config(function($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-      });
+      // $locationProvider.html5Mode({
+      //   enabled: true,
+      //   requireBase: false
+      // });
 
       // /partials = /public/app defined in express.js
       console.log('- inside angular module bookingsApp before routing');
@@ -28,8 +28,28 @@
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
-        .when('/bookings', {
-          templateUrl: '/partials/user/bookings/bookings-view',
+        .when('/', {
+          templateUrl: '/partials/user/bookings/bookings-all',
+          controller: 'BookingsCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/activity', {
+          templateUrl: '/partials/user/bookings/bookings-activity',
+          controller: 'BookingsCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/rentalcar', {
+          templateUrl: '/partials/user/bookings/bookings-rentalcar',
+          controller: 'BookingsCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/tour', {
+          templateUrl: '/partials/user/bookings/bookings-tour',
+          controller: 'BookingsCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/transfer', {
+          templateUrl: '/partials/user/bookings/bookings-transfer',
           controller: 'BookingsCtrl',
           controllerAs: 'vm'
         });

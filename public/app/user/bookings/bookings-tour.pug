@@ -1,0 +1,8 @@
+h3 Tour bookings
+div(ng-show="!vm.bookings.tour")
+  .style-msg.style-msg-light(style='background-color: #333;')
+    .sb-msg
+      i.icon-question-sign
+      strong You have NOT made any bookings with us.
+
+div(ng-repeat='booking in vm.bookings.tour') {{  booking }}

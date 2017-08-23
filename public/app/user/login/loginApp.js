@@ -29,7 +29,7 @@
       $locationProvider.hashPrefix("");
       $routeProvider
         .when('/login', {
-          templateUrl: '/partials/login/login',
+          templateUrl: '/partials/user/login/view',
           controller: 'LoginRegisterCtrl',
           controllerAs: 'vm'
         });

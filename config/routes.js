@@ -24,7 +24,7 @@ module.exports = function(app) {
       if (typeof req.session.passport.user != 'undefined')
         res.redirect('/user/profile/' + req.session.passport.user._id);
 
-    res.render('app/login/index');
+    res.render('app/user/login/index');
   });
 
   app.get('/logout', function(req, res) {

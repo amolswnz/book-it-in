@@ -1,1 +1,38 @@
-h1 {{ vm.txt }}
+h3 Profile
+strong name 
+| {{ vm.profile.name }}
+br
+strong email 
+| {{ vm.profile.email }}
+p
+  strong mobile 
+  span(ng-if='vm.profile.mobile') {{ vm.profile.mobile }} 
+  span(ng-if='!vm.profile.mobile') 
+    span(class='disabled') NOT FOUND
+  br
+  a(href='#/update') Update Mobile Number
+//- p 
+  strong profileimage 
+  span(ng-if='vm.profile.profileimage') {{ vm.profile.profileimage }} 
+  span(ng-if='!vm.profile.profileimage')  
+    span(class='disabled') NOT FOUND
+  br
+  a(href='#/update') Add profile image
+p 
+  strong address 
+  span(ng-if='vm.profile.address') {{ vm.profile.address }} 
+  span(ng-if='!vm.profile.address')  
+    span(class='disabled') NOT FOUND
+  br
+  strong city 
+  span(ng-if='vm.profile.city') {{ vm.profile.city }} 
+  span(ng-if='!vm.profile.city')  
+    span(class='disabled') NOT FOUND
+  br
+  strong country 
+  span(ng-if='vm.profile.country') {{ vm.profile.country }} 
+  span(ng-if='!vm.profile.country')  
+    span(class='disabled') NOT FOUND
+  span(ng-if='!vm.profile.address || !vm.profile.city || !vm.profile.country') 
+  br
+  a(href='#/update') Update your address details

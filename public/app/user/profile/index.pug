@@ -18,8 +18,26 @@ block main-content
   section(id="content")
     div(class="content-wrap")
       div(class="container clearfix")
-        div(ng-view)
+        .col-md-3
+          h4 Quick Links
+          ul(class='nav nav-pills nav-stacked')
+            li
+              a(href='#/') View profile
+            li
+              a(href='#/update') Update profile
+            li
+              a(href='#/pwd') Change password
+            hr.nomargin
+            li
+              a(href='/bookings', target='_self') Your bookings
+            hr.nomargin
+            li
+              a(href='/logout', target='_self') Logout
+        .col-md-9(ng-view)
+
+  #toast-container
 
 block additional-scripts
   script(src="/app/user/profile/profileApp.js", type='text/javascript')
   script(src="/app/user/profile/profile.ctrl.js", type='text/javascript')
+  script(src="/app/user/profile/profile.service.js", type='text/javascript')

@@ -1,0 +1,25 @@
+h3 Update
+form(name='profileForm', novalidate='')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label Your Name
+    input(ng-model='vm.profile.name')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label Email address
+    input(ng-model='vm.profile.email',disabled)
+  md-input-container.md-block.nobottommargin.col-md-4
+    label Mobile
+    input(ng-model='vm.profile.mobile',type='tel')
+  .clearfix
+  md-input-container.md-block.nobottommargin.col-md-5
+    label Address
+    input(ng-model='vm.profile.address',maxlength='40')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label City
+    input(ng-model='vm.profile.city',maxlength='20')
+  md-input-container.md-block.nobottommargin.col-md-3
+    label Country
+    input(ng-model='vm.profile.country',maxlength='20')
+  .clearfix
+  button(class='button button-3d button-rounded button-amber button-reveal tleft', type='submit', ng-click='vm.updateProfile()')
+    i.fa.fa-flash
+    span Update Profile

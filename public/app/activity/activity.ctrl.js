@@ -48,7 +48,7 @@
     vm.showList = function() {
       if (typeof(vm.bookings.detail) !== false) {
         vm.bookings.detail = 1;
-        return ActivityService.getActivitys(vm.bookings.city)
+        return ActivityService.getActivities(vm.bookings.city)
           .then(function(data) {
             vm.activities = data;
           });

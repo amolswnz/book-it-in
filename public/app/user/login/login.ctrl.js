@@ -30,6 +30,7 @@
                 $mdToast.simple()
                 .textContent(response.data.error)
                 .position('bottom left')
+                .parent($("#toast-container"))
                 .hideDelay(15000)
                 .theme("error-toast")
               );

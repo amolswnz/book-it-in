@@ -8,7 +8,7 @@
   function ActivityService($http, $log) {
     return {
       getCities: getCities,
-      getActivitys: getActivitys,
+      getActivities: getActivities,
 
       postBooking: postBooking
     };
@@ -21,7 +21,7 @@
         .catch(getError);
     }
 
-    function getActivitys(city) {
+    function getActivities(city) {
       console.log('get activitys');
       return $http.get('/activity/city/' + city)
         .then(getSuccess)

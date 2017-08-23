@@ -17,10 +17,11 @@
     }])
 
     .config(function($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-      });
+      // Multiple routes hence disabled
+      // $locationProvider.html5Mode({
+      //   enabled: true,
+      //   requireBase: false
+      // });
 
       // /partials = /public/app defined in express.js
       console.log('- inside angular module profileApp before routing');
@@ -28,11 +29,20 @@
       // Makes #! as #
       $locationProvider.hashPrefix("");
       $routeProvider
-        .when('/profile', {
+        .when('/', {
           templateUrl: '/partials/user/profile/profile-view',
           controller: 'ProfileCtrl',
           controllerAs: 'vm'
+        })
+        .when('/update', {
+          templateUrl: '/partials/user/profile/profile-update',
+          controller: 'ProfileCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/pwd', {
+          templateUrl: '/partials/user/profile/change-pwd',
+          controller: 'ProfileCtrl',
+          controllerAs: 'vm'
         });
-
     });
 }());

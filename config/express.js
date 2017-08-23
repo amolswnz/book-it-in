@@ -35,10 +35,10 @@ module.exports = function(app, config) {
     resave: false,
     saveUninitialized: true,
     // Following lines are to save session even if server restarts
-    // maxAge: new Date(Date.now() + 3600000),
-    // store: new MongoStore({
-    //   mongooseConnection: mongoose.connection
-    // })
+    maxAge: new Date(Date.now() + 3600000),
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
   }));
   app.use(passport.initialize());
   app.use(passport.session());

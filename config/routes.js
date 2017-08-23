@@ -1,23 +1,96 @@
 module.exports = function(app) {
+
+  /********************************************** App root-route ****************************************/
   app.get('/', function(req, res) {
     res.render('index', {
       nodeDynamicMsg: 'Hello from NodeJS and ExpresJS Dynamic Message ' + new Date()
     });
   });
 
+  /********************************************** Activity-routes ****************************************/
   app.get('/bookitin/activity', function(req, res) {
     res.render('app/activity/index');
   });
+  var activityCtrl = require('../models/activity/activity.ctrl');
+  app.get('/activity', activityCtrl.findAll);
+  app.get('/activity/cities', activityCtrl.findActivityCities);
+  app.get('/activity/city/:city', activityCtrl.findCityActivities);
+  app.get('/activity/cost/:id/:date', activityCtrl.findActivityCost);
+
+
+  /********************************************** Rentalcar-routes ****************************************/
   app.get('/bookitin/rentalcar', function(req, res) {
     res.render('app/rentalcar/index');
   });
+  var rentalcarCtrl = require('../models/rentalcar/rentalcar.ctrl');
+  app.get('/rentalcar', rentalcarCtrl.findAll); // Get all
+  app.get('/rentalcar/cities', rentalcarCtrl.findRentalcarCities); // Find all rental car cities
+  app.get('/rentalcar/city/:city', rentalcarCtrl.findByCityRentalcars); // Find all rental cars for the city
+  app.get('/rentalcar/types', rentalcarCtrl.findRentalcarTypes); // Find all rental car types
+  app.get('/rentalcar/type/:type', rentalcarCtrl.findByTypeRentalcars); // Find all the rental cars by type
+  app.get('/rentalcar/city/:city/type/:type', rentalcarCtrl.findCityAndTypeRentalcars); // Find rental cars for specified city and type
+  app.get('/rentalcar/cost/:id/:date', rentalcarCtrl.findRentalcarCost); // Find one by id
+
+
+  /********************************************** Tour-routes ****************************************/
   app.get('/bookitin/tour', function(req, res) {
     res.render('app/tour/index');
   });
+  var tourCtrl = require('../models/tour/tour.ctrl');
+  app.get('/tour', tourCtrl.findAll);
+  app.get('/tour/cities', tourCtrl.findTourCities);
+  app.get('/tour/city/:city', tourCtrl.findCityTours);
+  app.get('/tour/cost/:id/:date', tourCtrl.findTourCost);
+
+
+  /********************************************** Transfer-routes ****************************************/
   app.get('/bookitin/transfer', function(req, res) {
     res.render('app/transfer/index');
   });
+  var transferCtrl = require('../models/transfer/transfer.ctrl');
+  app.get('/transfer', transferCtrl.findAll);
+  app.get('/transfer/cities', transferCtrl.findTransferCities);
+  app.get('/transfer/city/:city', transferCtrl.findCityTransfers);
+  app.get('/transfer/cost/:id/:date', transferCtrl.findTransferCost);
 
+
+  /********************************************** User-routes ****************************************/
+  var userCtrl = require('../models/user/user.ctrl');
+  app.post('/user/register', userCtrl.register);
+  app.get('/user/logout', function(req, res) {
+    req.logout();
+    res.send('logged out');
+    res.redirect('/');
+  });
+  app.get('/user/email/:id', userCtrl.findDuplicateEmail);
+
+  /********************************************** Profile-routes ****************************************/
+  app.get('/profile', ensureAuthenticated, function(req, res) {
+    res.render('app/user/profile/index');
+  });
+  app.get('/user/profile/current', userCtrl.getProfile);
+  app.put('/user/profile/current', userCtrl.updateProfile);
+  app.patch('/user/profile/current', userCtrl.updatePwd);
+
+  /********************************************** User booking-routes ****************************************/
+  app.get('/bookings', ensureAuthenticated, function(req, res) {
+    res.render('app/user/bookings/index');
+  });
+
+
+
+  /********************************************** ALL CART Bookings-routes ****************************************/
+  var bookingCtrl = require('../models/booking/booking.ctrl');
+  app.post('/booking/save/tour', bookingCtrl.saveTourBooking);
+  app.post('/booking/save/transfer', bookingCtrl.saveTransferBooking);
+  app.post('/booking/save/activity', bookingCtrl.saveActivityBooking);
+  app.get('/booking-cart', function(req, res) {
+    res.end('your current cart will be shown here');
+  });
+
+
+
+  /********************************************** USER AUTHENTICATION ****************************************/
   app.get('/login', function(req, res) {
     // If session exists redirect to profile page
     if (typeof req.session.passport != 'undefined')
@@ -30,46 +103,6 @@ module.exports = function(app) {
   app.get('/logout', function(req, res) {
     app.locals.isLoggedIn = false;
     req.logout();
-    res.redirect('/');
-  });
-
-  // Detailed information in bookitin.numbers User Story
-  var activityCtrl = require('../models/activity/activity.ctrl');
-  app.get('/activity', activityCtrl.findAll);
-  app.get('/activity/cities', activityCtrl.findActivityCities);
-  app.get('/activity/city/:city', activityCtrl.findCityActivities);
-  app.get('/activity/cost/:id/:date', activityCtrl.findActivityCost);
-
-
-  var rentalcarCtrl = require('../models/rentalcar/rentalcar.ctrl');
-  app.get('/rentalcar', rentalcarCtrl.findAll); // Get all
-  app.get('/rentalcar/cities', rentalcarCtrl.findRentalcarCities); // Find all rental car cities
-  app.get('/rentalcar/city/:city', rentalcarCtrl.findByCityRentalcars); // Find all rental cars for the city
-  app.get('/rentalcar/types', rentalcarCtrl.findRentalcarTypes); // Find all rental car types
-  app.get('/rentalcar/type/:type', rentalcarCtrl.findByTypeRentalcars); // Find all the rental cars by type
-  app.get('/rentalcar/city/:city/type/:type', rentalcarCtrl.findCityAndTypeRentalcars); // Find rental cars for specified city and type
-  app.get('/rentalcar/cost/:id/:date', rentalcarCtrl.findRentalcarCost); // Find one by id
-
-
-  var tourCtrl = require('../models/tour/tour.ctrl');
-  app.get('/tour', tourCtrl.findAll);
-  app.get('/tour/cities', tourCtrl.findTourCities);
-  app.get('/tour/city/:city', tourCtrl.findCityTours);
-  app.get('/tour/cost/:id/:date', tourCtrl.findTourCost);
-
-
-  var transferCtrl = require('../models/transfer/transfer.ctrl');
-  app.get('/transfer', transferCtrl.findAll);
-  app.get('/transfer/cities', transferCtrl.findTransferCities);
-  app.get('/transfer/city/:city', transferCtrl.findCityTransfers);
-  app.get('/transfer/cost/:id/:date', transferCtrl.findTransferCost);
-
-
-  var userCtrl = require('../models/user/user.ctrl');
-  app.post('/user/register', userCtrl.register);
-  app.get('/user/logout', function(req, res) {
-    req.logout();
-    res.send('logged out');
     res.redirect('/');
   });
 
@@ -141,11 +174,6 @@ module.exports = function(app) {
     })(req, res, next);
   });
 
-  app.get('/user/profile/:id', ensureAuthenticated, function(req, res) {
-    res.render('app/user/profile');
-  });
-  app.get('/user/email/:id', userCtrl.findDuplicateEmail);
-
   passport.serializeUser(function(user, done) {
     console.log('serializeUser');
     var sessionUser = {
@@ -168,13 +196,11 @@ module.exports = function(app) {
   }
 
 
-  app.get('/profile', ensureAuthenticated, function(req, res) {
-    res.render('app/user/profile/index');
-  });
 
-  app.get('/bookings', ensureAuthenticated, function(req, res) {
-    res.render('app/user/bookings/index');
-  });
+
+
+
+  /********************************************** Test routes ****************************************/
 
 
   // passport.deserializeUser(function(id, done) {
@@ -210,15 +236,4 @@ module.exports = function(app) {
   app.get('/xui', function(req, res) {
     res.render('app/xui/xui');
   });
-
-  app.get('/booking-cart', function(req, res) {
-    // res.render('app/cart/xui');
-    res.end('your current cart will be shown here');
-  });
-
-  var bookingCtrl = require('../models/booking/booking.ctrl');
-  app.post('/booking/save/tour', bookingCtrl.saveTourBooking);
-  app.post('/booking/save/transfer', bookingCtrl.saveTransferBooking);
-  app.post('/booking/save/activity', bookingCtrl.saveActivityBooking);
-
 };

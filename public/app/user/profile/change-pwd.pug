@@ -1,0 +1,15 @@
+h3 Change Password
+form(name='profileForm', novalidate='')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label Old Password
+    input(ng-model='vm.pwd.pwd', type='password')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label New Password
+    input(ng-model='vm.pwd.newpwd',type='password')
+  md-input-container.md-block.nobottommargin.col-md-4
+    label Repeat Password
+    input(ng-model='vm.pwd.newpwd2',type='password')
+  .clearfix
+  button(class='button button-3d button-rounded button-amber button-reveal tleft', type='submit', ng-click='vm.updatePassword()')
+    i.fa.fa-flash
+    span Update Profile

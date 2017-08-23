@@ -1,4 +1,4 @@
-div(ng-hide='vm.booking.detail',class='ng-animate')
+div(class='ng-animate')
   h4 Create Booking
   form(name='bookingForm', ng-submit='vm.addBooking()', novalidate='')
     md-input-container.col-md-9
@@ -16,7 +16,7 @@ div(ng-hide='vm.booking.detail',class='ng-animate')
     .clearfix
     md-input-container.md-block.col-md-9
       label Drop off Location
-      input(ng-model="vm.booking.dropOffLocation", name='dropOffLocation', id='dropOffLocation', required='', places-auto-complete='', types='{{vm.types}}' component-restrictions="{country:'nz'}", placeholder='')
+      input(ng-model="vm.booking.dropOffLocation", name='dropOffLocation', id='dropOffLocation', required='', min-date='vm.booking.dateTimeStart', places-auto-complete='', types='{{vm.types}}' component-restrictions="{country:'nz'}", placeholder='')
       div(ng-messages='bookingForm.dropOffLocation.$error', multiple='', md-auto-hide='false')
         div(ng-message='required') Please select the drop off location.
     md-input-container.md-block.col-md-3

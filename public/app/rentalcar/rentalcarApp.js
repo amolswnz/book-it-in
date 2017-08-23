@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module("rentalcarApp", ['ngMaterial', 'ngMaterialDatePicker', 'ngMessages', 'ngRoute', 'angular-loading-bar', 'ngAnimate'], function($mdThemingProvider) {
+  angular.module("rentalcarApp", ['ngMaterial', 'ngMaterialDatePicker', 'ngMessages', 'ngRoute', 'angular-loading-bar', 'ngAnimate', 'ngMap'], function($mdThemingProvider) {
     var vrTheme = $mdThemingProvider.theme('vrTheme', 'default');
     var vrPalette = $mdThemingProvider.extendPalette('blue', {
       '500': '#b19259'
@@ -33,11 +33,11 @@
           controller: 'RentalcarCtrl',
           controllerAs: 'vm'
         })
-        .when('/bookitin/rentalcar/confirm', {
-          templateUrl: '/partials/rentalcar/confirm',
-          controller: 'RentalcarCtrl',
-          controllerAs: 'vm'
-        });
+        // .when('/bookitin/rentalcar/confirm', {
+        //   templateUrl: '/partials/rentalcar/confirm',
+        //   controller: 'RentalcarCtrl',
+        //   controllerAs: 'vm'
+        // });
     });
 //
 //   angular.module('rentalcarApp').animation('.name-of-animation', function(<injectables>) {

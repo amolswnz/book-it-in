@@ -33,6 +33,7 @@
           controller: 'BookingsCtrl',
           controllerAs: 'vm'
         })
+        
         .when('/activity', {
           templateUrl: '/partials/user/bookings/activity/view',
           controller: 'ActivityBookingsCtrl',
@@ -48,16 +49,29 @@
           controller: 'ActivityUpdateCtrl',
           controllerAs: 'vm'
         })
+
         .when('/rentalcar', {
           templateUrl: '/partials/user/bookings/bookings-rentalcar',
           controller: 'BookingsCtrl',
           controllerAs: 'vm'
         })
+
         .when('/tour', {
-          templateUrl: '/partials/user/bookings/bookings-tour',
-          controller: 'BookingsCtrl',
+          templateUrl: '/partials/user/bookings/tour/view',
+          controller: 'TourBookingsCtrl',
           controllerAs: 'vm'
         })
+        .when('/tour/update/:id', {
+          templateUrl: '/partials/user/bookings/tour/update',
+          controller: 'TourUpdateCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/tour/cancel/:id', {
+          templateUrl: '/partials/user/bookings//tour/cancel',
+          controller: 'TourUpdateCtrl',
+          controllerAs: 'vm'
+        })
+
         .when('/transfer', {
           templateUrl: '/partials/user/bookings/bookings-transfer',
           controller: 'BookingsCtrl',

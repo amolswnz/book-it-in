@@ -124,35 +124,6 @@ module.exports = {
 
 
   getAll: function(req, res) {
-    // console.log('getting bookings for', req.user._id);
-    // Booking.aggregate([{
-    //     $match: {
-    //       'user.tempId': req.user._id
-    //     }
-    //   },
-    //   {
-    //     $unwind: "$activity"
-    //   }, {
-    //     $lookup: {
-    //       from: 'activities',
-    //       localField: 'activity.objId',
-    //       foreignField: '_id',
-    //       as: 'activityDetail'
-    //     }
-    //   },
-    //   {
-    //     '$sort': {
-    //       'activity.dateBooked': -1
-    //     }
-    //   },
-    // ], function(err, result) {
-    //   if (err) {
-    //     next(err);
-    //   } else {
-    //     res.json(result);
-    //   }
-    // });
-
     Booking.findOne({
       'user.tempId': req.user._id
     }, function(err, bookings) {
@@ -161,21 +132,10 @@ module.exports = {
       }
       res.json(bookings);
     });
-    //
-    //
-    // for (t = 0; t < bookings.transfer.length; t++)
-    //   console.log(bookings.transfer[t]);
-    // for (t = 0; t < bookings.tour.length; t++)
-    //   console.log(bookings.tour[t]);
-    // for (t = 0; t < bookings.rentalcar.length; t++)
-    //   console.log(bookings.rentalcar[t]);
-
-    // res.json(bookings);
-
-
-
   },
 
+
+  /********************************************** Activity-controller ****************************************/
   getActivityBookings: function(req, res) {
     Booking.aggregate([{
         $match: {
@@ -268,4 +228,99 @@ module.exports = {
   },
 
 
+
+
+
+  /********************************************** Tour-controller ****************************************/
+
+  getTourBookings: function(req, res) {
+    Booking.aggregate([{
+        $match: {
+          'user.tempId': req.user._id
+        }
+      },
+      {
+        $unwind: "$tour"
+      }, {
+        $lookup: {
+          from: 'tours',
+          localField: 'tour.objId',
+          foreignField: '_id',
+          as: 'tourDetail'
+        }
+      },
+      {
+        '$sort': {
+          'tour.dateBooked': -1
+        }
+      },
+    ], function(err, result) {
+      if (err) {
+        next(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
+
+  getTour: function(req, res, next) {
+    console.log(req.user._id, req.params.id);
+    Booking.findOne({
+        'tour._id': req.params.id
+      }, {
+        'tour': {
+          $elemMatch: {
+            '_id': req.params.id
+          }
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result.tour[0]);
+        }
+      });
+  },
+
+  deleteTour: function(req, res, next) {
+    console.log(req.user._id, req.params.id);
+    Booking.update({
+        'user.tempId': req.user._id
+      }, {
+        $pull: {
+          'tour': {
+            '_id': req.params.id
+          }
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      });
+  },
+
+  updateTour: function(req, res, next) {
+    Booking.findOneAndUpdate({
+        'user.tempId': req.user._id,
+        'tour._id': req.params.id
+      }, {
+        '$set': {
+          'tour.$': req.body.tour
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      });
+  },
 };

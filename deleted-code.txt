@@ -1,3 +1,44 @@
+getAll: function(req, res) {
+  // console.log('getting bookings for', req.user._id);
+  // Booking.aggregate([{
+  //     $match: {
+  //       'user.tempId': req.user._id
+  //     }
+  //   },
+  //   {
+  //     $unwind: "$activity"
+  //   }, {
+  //     $lookup: {
+  //       from: 'activities',
+  //       localField: 'activity.objId',
+  //       foreignField: '_id',
+  //       as: 'activityDetail'
+  //     }
+  //   },
+  //   {
+  //     '$sort': {
+  //       'activity.dateBooked': -1
+  //     }
+  //   },
+  // ], function(err, result) {
+  //   if (err) {
+  //     next(err);
+  //   } else {
+  //     res.json(result);
+  //   }
+  // });
+
+  Booking.findOne({
+    'user.tempId': req.user._id
+  }, function(err, bookings) {
+    if (err) {
+      throw new Error(err);
+    }
+    res.json(bookings);
+  });
+},
+
+
 function getActivity(id) {
   Activity.findOne({
     _id: id

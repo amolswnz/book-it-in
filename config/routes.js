@@ -91,11 +91,14 @@ module.exports = function(app) {
   app.get('/bookings/all', ensureAuthenticated, bookingCtrl.getAll);
 
   app.get('/bookings/activity', ensureAuthenticated, bookingCtrl.getActivityBookings);
-
   app.get('/bookings/activity/:id', ensureAuthenticated, bookingCtrl.getActivity);
   app.delete('/bookings/activity/:id', ensureAuthenticated, bookingCtrl.deleteActivity);
-  app.put('/bookings/activity/:id',
-          bookingCtrl.updateActivity);
+  app.put('/bookings/activity/:id', ensureAuthenticated, bookingCtrl.updateActivity);
+
+  app.get('/bookings/tour', ensureAuthenticated, bookingCtrl.getTourBookings);
+  app.get('/bookings/tour/:id', ensureAuthenticated, bookingCtrl.getTour);
+  app.delete('/bookings/tour/:id', ensureAuthenticated, bookingCtrl.deleteTour);
+  app.put('/bookings/tour/:id', ensureAuthenticated, bookingCtrl.updateTour);
 
 
   /********************************************** USER AUTHENTICATION ****************************************/

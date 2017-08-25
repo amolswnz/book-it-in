@@ -1,0 +1,19 @@
+h3 Cancel Your Activity booking
+.style-msg.errormsg
+  .sb-msg
+    i.icon-remove
+    strong CANCEL BOOKING!
+    |  Please note that you will incur cancelation charges
+
+p {{ vm.activity.details }} in 
+  strong {{ vm.activity.city }}
+  br 
+  | {{ vm.booking.adult }} Adult &amp; {{ vm.booking.child }} child
+  br
+  strong Total {{ vm.booking.totalAdultCost +  vm.booking.totalChildCost  | currency }}
+  br
+  strong Date {{ vm.booking.dateBooked | date: 'mediumDate'}}
+div.text-center
+  button(class='button button-large button-3d button-rounded button-red', ng-click='vm.confirmCancellation()')
+    i.fa.fa-remove
+    span Cancel Booking

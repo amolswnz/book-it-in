@@ -18,6 +18,8 @@ block main-content
   section(id="content")
     div(class="content-wrap")
       div(class="container clearfix")
+        if msg
+          p=msg
         div(ng-view)
 
   #toast-container

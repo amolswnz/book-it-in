@@ -8,8 +8,10 @@ var BookingSchema = new Schema({
     notes: String
   },
   'activity': [{
-    _id: false,
-    objId: Schema.Types.ObjectId,
+    objId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Activity'
+    },
     adult: Number,
     child: Number,
     totalAdultCost: Number,
@@ -21,7 +23,6 @@ var BookingSchema = new Schema({
     }
   }],
   'tour': [{
-    _id: false,
     objId: Schema.Types.ObjectId,
     adult: Number,
     child: Number,
@@ -34,7 +35,6 @@ var BookingSchema = new Schema({
     }
   }],
   'rentalcar': [{
-    _id: false,
     objId: Schema.Types.ObjectId,
     dateFrom: Date,
     dateTo: Date,
@@ -44,7 +44,6 @@ var BookingSchema = new Schema({
     }
   }],
   'transfer': [{
-    _id: false,
     objId: Schema.Types.ObjectId,
     pax: Number,
     totalCost: Number,

@@ -1,3 +1,63 @@
+function getActivity(id) {
+  Activity.findOne({
+    _id: id
+  }, function(err, data) {
+    if (err) {
+      throw new Error(err);
+    }
+    console.log('act', data);
+    return data;
+  });
+}
+
+function getTour(id) {
+  Tour.findOne({
+    _id: id
+  }, callback);
+}
+
+function getTransfer(id) {
+  Transfer.findOne({
+    _id: id
+  }, callback);
+}
+
+function callback(err, data) {
+  if (err) {
+    throw new Error(err);
+  }
+  // console.log('act', data);
+  return data;
+}
+
+
+  getAll: function(req, res) {
+
+var bookingsData = {};
+var activities = [{}];
+
+for (t = 0; t < bookings.activity.length; t++) {
+  // console.log(bookings.activity[t]);
+  var d = bookings.activity[t];
+  Activity.findOne({
+    _id: bookings.activity[t].objId
+  }, function(err, data) {
+    if (err) {
+      throw new Error(err);
+    }
+    var x = {
+      'details': data,
+      'bookings': d
+    };
+    // console.log(d, data);
+    activities.push(x);
+    // console.log(x);
+  });
+}
+console.log('activity', activities);
+
+
+
 "angular-material": "^1.1.4",
 "angular-ui-router": "^1.0.3",
 

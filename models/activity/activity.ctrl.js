@@ -52,6 +52,17 @@ module.exports = {
       a: req.params.abc,
       b: req.params.def
     });
-  }
+  },
+
+  findOne: function(req, res) {
+    Activity.findOne({
+      _id: req.params.id
+    }, function(err, data) {
+      if (err) {
+        throw new Error(err);
+      }
+      res.json(data);
+    });
+  },
 
 };

@@ -2,6 +2,12 @@ var mongoose = require('mongoose');
 //Load all your models
 var Booking = require('./booking.model.js');
 
+
+var Activity = require('./../activity/activity.model');
+var Rentalcar = require('./../rentalcar/rentalcar.model');
+var Tour = require('./../tour/tour.model');
+var Transfer = require('./../transfer/transfer.model');
+
 //Now, this call won't fail because User has been added as a schema.
 mongoose.model('Booking');
 
@@ -118,16 +124,148 @@ module.exports = {
 
 
   getAll: function(req, res) {
-    console.log('getting bookings for', req.user._id);
+    // console.log('getting bookings for', req.user._id);
+    // Booking.aggregate([{
+    //     $match: {
+    //       'user.tempId': req.user._id
+    //     }
+    //   },
+    //   {
+    //     $unwind: "$activity"
+    //   }, {
+    //     $lookup: {
+    //       from: 'activities',
+    //       localField: 'activity.objId',
+    //       foreignField: '_id',
+    //       as: 'activityDetail'
+    //     }
+    //   },
+    //   {
+    //     '$sort': {
+    //       'activity.dateBooked': -1
+    //     }
+    //   },
+    // ], function(err, result) {
+    //   if (err) {
+    //     next(err);
+    //   } else {
+    //     res.json(result);
+    //   }
+    // });
+
     Booking.findOne({
       'user.tempId': req.user._id
-    }, function(err, data) {
+    }, function(err, bookings) {
       if (err) {
         throw new Error(err);
       }
-      res.json(data);
+      res.json(bookings);
     });
-  }
+    //
+    //
+    // for (t = 0; t < bookings.transfer.length; t++)
+    //   console.log(bookings.transfer[t]);
+    // for (t = 0; t < bookings.tour.length; t++)
+    //   console.log(bookings.tour[t]);
+    // for (t = 0; t < bookings.rentalcar.length; t++)
+    //   console.log(bookings.rentalcar[t]);
+
+    // res.json(bookings);
+
+
+
+  },
+
+  getActivityBookings: function(req, res) {
+    Booking.aggregate([{
+        $match: {
+          'user.tempId': req.user._id
+        }
+      },
+      {
+        $unwind: "$activity"
+      }, {
+        $lookup: {
+          from: 'activities',
+          localField: 'activity.objId',
+          foreignField: '_id',
+          as: 'activityDetail'
+        }
+      },
+      {
+        '$sort': {
+          'activity.dateBooked': -1
+        }
+      },
+    ], function(err, result) {
+      if (err) {
+        next(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
+
+  getActivity: function(req, res, next) {
+    console.log(req.user._id, req.params.id);
+    Booking.findOne({
+        'activity._id': req.params.id
+      }, {
+        'activity': {
+          $elemMatch: {
+            '_id': req.params.id
+          }
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result.activity[0]);
+        }
+      });
+  },
+
+  deleteActivity: function(req, res, next) {
+    console.log(req.user._id, req.params.id);
+    Booking.update({
+        'user.tempId': req.user._id
+      }, {
+        $pull: {
+          'activity': {
+            '_id': req.params.id
+          }
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      });
+  },
+
+  updateActivity: function(req, res, next) {
+    Booking.findOneAndUpdate({
+        'user.tempId': req.user._id,
+        'activity._id': req.params.id
+      }, {
+        '$set': {
+          'activity.$': req.body.activity
+        }
+      },
+      function(err, result) {
+        if (err) {
+          next(err);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      });
+  },
 
 
 };

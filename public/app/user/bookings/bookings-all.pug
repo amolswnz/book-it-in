@@ -4,7 +4,7 @@ div(ng-show="!vm.bookings")
     .sb-msg
       i.icon-question-sign
       strong You have NOT made any bookings with us.
-p(class='debug') {{ vm.bookings }}
+//- p(class='debug') {{ vm.bookings }}
 div(ng-show="vm.bookings")
   h4 Your have made  
     em {{ vm.bookings.activity.length + vm.bookings.rentalcar.length + vm.bookings.tour.length + vm.bookings.transfer.length }} 

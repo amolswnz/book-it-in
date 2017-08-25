@@ -34,8 +34,18 @@
           controllerAs: 'vm'
         })
         .when('/activity', {
-          templateUrl: '/partials/user/bookings/bookings-activity',
-          controller: 'BookingsCtrl',
+          templateUrl: '/partials/user/bookings/activity/view',
+          controller: 'ActivityBookingsCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/activity/update/:id', {
+          templateUrl: '/partials/user/bookings/activity/update',
+          controller: 'ActivityUpdateCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/activity/cancel/:id', {
+          templateUrl: '/partials/user/bookings//activity/cancel',
+          controller: 'ActivityUpdateCtrl',
           controllerAs: 'vm'
         })
         .when('/rentalcar', {

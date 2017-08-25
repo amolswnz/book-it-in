@@ -13,6 +13,7 @@ module.exports = function(app) {
   });
   var activityCtrl = require('../models/activity/activity.ctrl');
   app.get('/activity', activityCtrl.findAll);
+  app.get('/activity/:id', activityCtrl.findOne);
   app.get('/activity/cities', activityCtrl.findActivityCities);
   app.get('/activity/city/:city', activityCtrl.findCityActivities);
   app.get('/activity/cost/:id/:date', activityCtrl.findActivityCost);
@@ -87,8 +88,14 @@ module.exports = function(app) {
   app.get('/bookings', ensureAuthenticated, function(req, res) {
     res.render('app/user/bookings/index');
   });
-  app.get('/bookings/all', /*ensureAuthenticated, */ bookingCtrl.getAll);
+  app.get('/bookings/all', ensureAuthenticated, bookingCtrl.getAll);
 
+  app.get('/bookings/activity', ensureAuthenticated, bookingCtrl.getActivityBookings);
+
+  app.get('/bookings/activity/:id', ensureAuthenticated, bookingCtrl.getActivity);
+  app.delete('/bookings/activity/:id', ensureAuthenticated, bookingCtrl.deleteActivity);
+  app.put('/bookings/activity/:id',
+          bookingCtrl.updateActivity);
 
 
   /********************************************** USER AUTHENTICATION ****************************************/
@@ -197,6 +204,9 @@ module.exports = function(app) {
     if (req.isAuthenticated())
       return next();
     res.redirect('/login');
+    // res.render('/login',{
+    //   msg: 'You are NOT logged in. Please login to continue'
+    // });
   }
 
 

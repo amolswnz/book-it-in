@@ -38,6 +38,7 @@
     }
 
     function getCities() {
+      console.log('calling service');
       return ActivityService.getCities()
         .then(function(data) {
           vm.cities = data;

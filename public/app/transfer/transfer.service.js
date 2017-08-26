@@ -29,7 +29,7 @@
     }
 
     function postBooking(bookingData) {
-      return $http.post('/booking/save/transfer', bookingData)
+      return $http.post('/booking/transfer', bookingData)
         .then(getSuccess)
         .catch(getError);
     }

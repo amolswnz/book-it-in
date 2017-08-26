@@ -16,25 +16,26 @@
     // Implementation
 
     function getCities() {
+      console.log('inside service');
       return $http.get('/activity/cities')
         .then(getSuccess)
         .catch(getError);
     }
 
     function getActivities(city) {
-      console.log('get activitys');
       return $http.get('/activity/city/' + city)
         .then(getSuccess)
         .catch(getError);
     }
 
     function postBooking(bookingData) {
-      return $http.post('/booking/save/activity', bookingData)
+      return $http.post('/booking/activity', bookingData)
         .then(getSuccess)
         .catch(getError);
     }
 
     function getSuccess(res) {
+      console.log('success res', res);
       return res.data;
     }
 

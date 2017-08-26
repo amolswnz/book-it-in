@@ -28,7 +28,7 @@
     // }
 
     function postBooking(bookingData) {
-      return $http.post('/booking/save/rentalcarBooking', bookingData)
+      return $http.post('/bookingrentalcarBooking', bookingData)
         .then(getSuccess)
         .catch(getError);
     }

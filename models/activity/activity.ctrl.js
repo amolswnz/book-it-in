@@ -38,13 +38,10 @@ module.exports = {
   },
 
   findActivityCities: function(req, res) {
-    console.log(req);
     Activity.distinct('city', function(err, data) {
       if (err) {
-        console.log(err);
         throw new Error(err);
       }
-      console.log(data);
       res.json(data);
     });
   },

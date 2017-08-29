@@ -30,7 +30,7 @@ div(ng-show='vm.bookings.detail',class='animated fadeInLeft')
           .clearfix
           div.col-md-6 
             md-input-container.md-block.nobottommargin
-              label.nomargin qty {{ $index }}
+              label.nomargin qty 
               input(ng-model='vm.bookings.adult[activity._id]', type='number' min='1' max='99' ng-change='vm.calculateAdultPrice(activity._id, activity.price.adult)', ng-disabled='vm.bookings.added[activity._id]', name='adult{{$index}}')
               div(ng-messages='activitySelectionForm["adult" + $index].$error', multiple='', md-auto-hide='false')
                 div(ng-message='min') Please select at least one pax

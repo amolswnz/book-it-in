@@ -1,19 +1,14 @@
-# MEAN Application v3
-  with Angular UI Router
+# MEAN Application - BookItIn.co.nz (Under development)
+  Side project to show MEAN Stack expertise
 
-### To use this MEAN Walking Skeleton
-Step 1] `npm install`<br>
-Step 2] Create .bowerrc file<br>
-Step 3] Specify directory name to for the vendor files location in the .bowerrc file <br>
-  ```{ "directory": "public/vendor" } ```<br>
-Step 3] `bower install`<br>
-Step 4] Create .gitignore file to ignore commits of the following folders<br>
-node_modules<br>
-public/vendor<br>
-Step 5] `nodemon`<br>
-Step 6] Create something beautiful
+#### Live Demo
+http://45.76.122.69/
 
-### Walking skeleton contents
+### Project detail
+* Customers can book Activity, Rental Car, Tour, Transfer
+* Registration
+* Admin Panel to CRUD - Activity, Rental Car, Tour, Transfer
+
 ##### Bower components
 * bootstrap
 * toastr
@@ -21,14 +16,20 @@ Step 6] Create something beautiful
 * angular-resource
 * angular-route
 * components-font-awesome
+* moment
+* angular-material
+* angular-loading-bar
+* angular-material-datetimepicker
 
 ##### Node components
 * express
 * stylus
-* moragan
+* morgan
 * body-parser
 * mongoose
 * pug
+* bcryptjs
+* passport
 
 # Credits
 [MongoDB](https://www.mongodb.com/) is an open source, document-oriented database designed with both scalability and developer agility in mind.
